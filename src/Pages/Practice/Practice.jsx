@@ -8,7 +8,33 @@ import "./practice.css";
 
 const Practice = () => {
 
-  let testString = "The faster you drive, the more fuel you're using. 55 mph is the optimum speed of the highway.";
+  let testString = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.";
+  // let testString = "Lorem ipsum is a silly looking sequence of characters!" 
+
+  // Render DOM elements for display from the typing practice string. Use memotization to avoid heavy re-rendering.
+  const renderElementsFromString = () => {
+    let wordsArray = testString.split(" ");
+
+    let content = wordsArray.map((word) => {
+      word += " ";
+      let letters = word.split('');
+
+      return (
+        <div className="screen-word">
+          {letters.map((letter) => {
+            return (
+              <div className="screen-letter">
+                { letter }
+              </div>
+            )
+          })}
+        </div>
+      )
+    })
+
+    return content;
+  }
+
 
   return (
     <div className="practice-page-wrapper">
@@ -20,16 +46,7 @@ const Practice = () => {
 
       <div className="typing-screen-card-wrapper" style={{ marginTop : '50px'}}>
         <div className="screen-card-content">
-
-          <div className="screen-word">
-            <div className="screen-letter letter-correct"> H </div>
-            <div className="screen-letter letter-incorrect"> e </div>
-            <div className="screen-letter is-active"> l </div>
-            <div className="screen-letter"> l </div>
-            <div className="screen-letter"> o </div>
-            <div className="screen-letter">  </div>
-          </div>
-
+          {renderElementsFromString()}
         </div>
       </div>
     </div>

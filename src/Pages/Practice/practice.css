@@ -1,18 +1,32 @@
+.practice-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .typing-screen-card-wrapper {
-  width: 700px;
+  width: 80%;
   height: 600px;
   background-color: #fff;
   padding: 5px 0px;
+  border-radius: 10px;
 }
 
 .screen-card-content {
   display: flex;
   flex-wrap: wrap;
+  align-content: baseline;
   margin: 5px 10px;
+  height: 90%;
 }
 
 .screen-word {
   display: flex;
+  min-width: 25px;
+  max-height: 48px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid lightgray;
 }
 
 .screen-letter {
@@ -23,7 +37,7 @@
   min-width: 25px;
   text-align: center;
   border-radius: .5rem;
-  margin: 0px 1px;
+  margin: 0px .5px;
   border-bottom: 3px solid transparent;
   transition: color 2s ease-in-out;
 }
