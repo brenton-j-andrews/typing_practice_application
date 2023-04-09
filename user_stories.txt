@@ -1,0 +1,20 @@
+Typing Practice App User Stories:
+
+Client:
+1. User can forgo logging into account by playing as a guest. 
+2. User can select a practice time length (1 min, 3 min, 5 min).
+3. Upon selecting time length, user can press 'Start Practice' to begin the session.
+4. User can see a countdown timer displaying time left in session.
+5. Upon starting the session, the user can see a paragraph of text displayed.
+6. Upon starting the session, user can begin typing in the input box (which overlays the displayed text).
+7. User can see correctly typed words (green), and incorrect words (red) as they type.
+8. User to use backspace to correct words that they missed.
+9. User can view live stats for key accuracy, successful and unsuccessful attempts.
+10. User can hear sounds indicating good and bad key strokes.
+11. On ending the session, user can view words per minute achieved (1 'word' defined as 5 successful characters) and other stats. 
+12. If playing as a guest, user will be prompted to create account when practice stats are displayed.
+
+Backend:
+1. User can create an account (w/ email verification), or sign into the app via their Google account.  
+2. User can see high scores achieved by others / themselves for selected time format.
+3. User stats page will display cumulative performance stats from all practice sessions.
