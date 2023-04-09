@@ -1,9 +1,11 @@
+import Practice from './Pages/Practice/Practice';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      this is my typing application!
+    <div className="app-wrapper">
+      <Practice />
     </div>
   );
 }

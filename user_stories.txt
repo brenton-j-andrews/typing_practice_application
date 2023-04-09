@@ -19,8 +19,6 @@ Backend:
 2. User can see high scores achieved by others / themselves for selected time format.
 3. User stats page will display cumulative performance stats from all practice sessions.
 
-
-
 User Experience Walkthru with guest account:
 1. User clicks link to application and is delivered to the 'Staging' Page. 
 2. If the user is not logged in, a modal will appear giving the option to create or log into an account.
@@ -33,3 +31,4 @@ User Experience Walkthru with guest account:
 9. On reaching the end of the line, the text input box will scroll up to remain at a consistant height.
 10. User will be able to see live typing stats and remaining time above the input box.
 11. At the end of a session, a modal will pop up with session statistics, an offer to play again or return to the Staging page and a offer to create an account.
+
