@@ -18,3 +18,18 @@ Backend:
 1. User can create an account (w/ email verification), or sign into the app via their Google account.  
 2. User can see high scores achieved by others / themselves for selected time format.
 3. User stats page will display cumulative performance stats from all practice sessions.
+
+
+
+User Experience Walkthru with guest account:
+1. User clicks link to application and is delivered to the 'Staging' Page. 
+2. If the user is not logged in, a modal will appear giving the option to create or log into an account.
+3. User can click 'play as guest' to close the modal.
+4. User selects Time format (1, 3, 5 minutes) and can view the highest achieved WPM below.
+5. Once ready to type, the user can press 'Start Practice' to be redirected to the 'Practice' page.
+6. On redirection to the Practice page, the textbox will be disabled and opaque with a 5 second visual and aural countdown displayed.
+7. On countdown completion, the textbox will be focused on, the typing text will appear, and the time countdown will start.
+8. On typing a correct word or character, the typed character will go from default color to green. If typed incorrectly, it will turn red.
+9. On reaching the end of the line, the text input box will scroll up to remain at a consistant height.
+10. User will be able to see live typing stats and remaining time above the input box.
+11. At the end of a session, a modal will pop up with session statistics, an offer to play again or return to the Staging page and a offer to create an account.
