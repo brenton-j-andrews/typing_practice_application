@@ -18,7 +18,7 @@ const Practice = () => {
   const [ rightActiveWord, setRightActiveWord ] = useState(wordArray[arrayIndex.current]);
   const [ leftActiveWord, setLeftActiveWord ] = useState("");
 
-  const [ wordMistake, setWordMistake ] = useState(false);
+  const [ typoPresent, setTypoPresent ] = useState(false);
 
 
   const handleKeyStroke = (e) => {
@@ -28,7 +28,7 @@ const Practice = () => {
     let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
     
     // Character can only be correct if there are no current errors.
-    if (errorIndex.current === 0) {
+    if (!typoPresent) {
 
        // Correct input provided.
        if (isCorrectCharacter) {
@@ -51,30 +51,36 @@ const Practice = () => {
 
       // Incorrect input provided.
       else {
-        errorIndex.current ++;
-        console.log(errorIndex.current);
+        // errorIndex.current ++;
+        // console.log(errorIndex.current);
         setLeftActiveWord(leftActiveWord + typedCharacter);
-        setWordMistake(true);
+        setTypoPresent(true);
       }
-    }
-
-    // If errorIndex is > 0, error must be cleared via backspace or word skipped via spacebar.
-    else {
-      if (typedCharacter === '') {
-        console.log(`backspace detected...`);
-      }
-      console.log(typedCharacter);
     }
   }
 
   const handleBackspace = (e) => {
-    if (e.keyCode === 8 && !wordMistake) {
+
+    // Backspace key.
+    if (e.keyCode === 8) {
+
       let updatedLeft = leftActiveWord.slice(0, -1);
-      let updatedRight = leftActiveWord.charAt(leftActiveWord.length - 1);
-      setRightActiveWord(updatedRight + rightActiveWord);
-      setLeftActiveWord(updatedLeft);
+
+      // Clear correct characters.
+      if (!typoPresent) {
+        let updatedRight = leftActiveWord.charAt(leftActiveWord.length - 1);
+        setRightActiveWord(updatedRight + rightActiveWord);
+        setLeftActiveWord(updatedLeft);
+        wordIndex.current --;
+      }
+
+      // Clear erroneous characters.
+      else {
+        setLeftActiveWord(updatedLeft);
+        setTypoPresent(false);
+      } 
     }
-  }
+  } 
 
   return (
     <div className="practice-page-wrapper">
@@ -97,7 +103,7 @@ const Practice = () => {
             else return null;
           })}
 
-          <div className={wordMistake ? "screen-word active-left word-incorrect" : "screen-word active-left" }> 
+          <div className={typoPresent ? "screen-word active-left word-incorrect" : "screen-word active-left" }> 
             { leftActiveWord } 
           </div>
         </div>
@@ -119,10 +125,6 @@ const Practice = () => {
             })}
         </div>
       </div>
-
-      {/* <button onClick={handleIncrement}> Increment </button>
-      <button onClick={handleDecrement}> Decrement </button> */}
-      {/* <button onClick={handleKeyStroke}> Test space </button> */}
 
       <form action='/'>
         <input 

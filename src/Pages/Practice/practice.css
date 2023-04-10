@@ -40,12 +40,12 @@
 }
 
 .active-word {
-  /* border-left: 3px solid #3295db; */
+  border-left: 3px solid #3295db;
   border-radius: 0px;
   color: #3295db;
-  /* animation-name: border-blinker;
+  animation-name: border-blinker;
   animation-duration: 1.5s;
-  animation-iteration-count: infinite; */
+  animation-iteration-count: infinite;
 }
 
 @keyframes border-blinker {
