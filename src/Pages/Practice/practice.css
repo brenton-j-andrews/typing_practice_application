@@ -30,15 +30,14 @@
 
 .screen-word {
   display: flex;
-  /* min-width: 15px; */
   width: auto;
   max-height: 48px;
   font-size: 30px;
   font-family: 'PT Mono';
   line-height: 1.5;
   margin-right: 15px;
+  /* padding-right: 15px; */
 }
-
 
 .active-word {
   /* border-left: 3px solid #3295db; */
@@ -61,6 +60,9 @@
   }
 }
 
+.active-left {
+  margin: 0px;
+}
 
 .word-correct {
   color: rgb(106, 153, 106);

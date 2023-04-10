@@ -2,25 +2,53 @@
  * The practice page will render the typing speed test and track all data associated with a single practice session.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import "./practice.css";
 
 const Practice = () => {
 
-  let wordArray = ["hello", "world", "I", "am", "Brenton", "J", "Andrews"];
 
-  const [ arrayIndex, setArrayIndex ] = useState(0);
-  const [ leftActiveWord, setLeftActiveWord ] = useState(wordArray[arrayIndex]);
+  let wordArray = ["aaaaa ", "world ", "I ", "am ", "Brenton ", "J ", "Andrews "];
 
-  const handleIncrement = () => {
-    setLeftActiveWord(wordArray[arrayIndex + 1]);
-    setArrayIndex(arrayIndex + 1);
-  }
+  let arrayIndex = useRef(0);
+  let wordIndex = useRef(0);
 
-  const handleDecrement = () => {
-    setLeftActiveWord(wordArray[arrayIndex - 1]);
-    setArrayIndex(arrayIndex - 1);
+  const [ rightActiveWord, setRightActiveWord ] = useState(wordArray[arrayIndex.current]);
+  const [ leftActiveWord, setLeftActiveWord ] = useState("");
+
+
+  const handleKeyStroke = (e) => {
+    let typedCharacter = e.target.value;
+    document.getElementById("form-input").value = "";
+
+    let updatedRight = rightActiveWord.slice(1);
+    console.log("word, ", wordArray[arrayIndex.current].charAt(wordIndex.current));
+    console.log(`input: `, typedCharacter);
+
+
+    // Check for correct input.
+    if (typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current)) {
+
+      wordIndex.current = wordIndex.current + 1;
+          
+      if (updatedRight === "") {
+        setRightActiveWord(wordArray[arrayIndex + 1]);
+        setLeftActiveWord("")
+        arrayIndex.current = arrayIndex.current + 1;
+      } 
+      else {
+        let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
+        setRightActiveWord(updatedRight);
+        setLeftActiveWord(updatedLeft);
+      }
+    }
+
+    else {
+      console.log(`wrong dude!`);
+    }
+
+
   }
 
   return (
@@ -31,10 +59,10 @@ const Practice = () => {
       </div>
 
       <div className="typing-screen-card-wrapper" style={{ marginTop : '50px'}}>
-
+        
         <div className="screen-card-content-left">
           {wordArray.map((word, index) => {
-            if (index < arrayIndex) {
+            if (index < arrayIndex.current) {
               return (
                 <div className="screen-word word-correct">
                   { word }
@@ -43,15 +71,19 @@ const Practice = () => {
             }
             else return null;
           })}
+
+          <div className="screen-word active-left"> 
+            { leftActiveWord } 
+          </div>
         </div>
 
         <div className="screen-card-content-right">
           <div className="screen-word active-word"> 
-            { leftActiveWord } 
+            { rightActiveWord } 
           </div>
 
           {wordArray.map((word, index) => {
-            if (index > arrayIndex) {
+            if (index > arrayIndex.current) {
               return (
                 <span className="screen-word">
                   { word }
@@ -63,10 +95,25 @@ const Practice = () => {
         </div>
       </div>
 
-      <button onClick={handleIncrement}> Increment </button>
-      <button onClick={handleDecrement}> Decrement </button>
+      {/* <button onClick={handleIncrement}> Increment </button>
+      <button onClick={handleDecrement}> Decrement </button> */}
+      {/* <button onClick={handleKeyStroke}> Test space </button> */}
+
+      <form action='/'>
+        <input id="form-input" type="text" autoFocus className="type-text-input" onChange={(e) => {handleKeyStroke(e)}}/>
+      </form>
     </div>
   );
 };
 
 export default Practice;
+
+// const handleIncrement = () => {
+//   setRightActiveWord(wordArray[arrayIndex + 1]);
+//   setArrayIndex(arrayIndex + 1);
+// }
+
+// const handleDecrement = () => {
+//   setRightActiveWord(wordArray[arrayIndex - 1]);
+//   setArrayIndex(arrayIndex - 1);
+// }
