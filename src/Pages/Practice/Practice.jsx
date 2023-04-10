@@ -9,46 +9,71 @@ import "./practice.css";
 const Practice = () => {
 
 
-  let wordArray = ["aaaaa ", "world ", "I ", "am ", "Brenton ", "J ", "Andrews "];
+  let wordArray = ["hello ", "world ", "I ", "am ", "Brenton ", "J ", "Andrews "];
 
   let arrayIndex = useRef(0);
-  let wordIndex = useRef(0);
+  let wordIndex = useRef(0)
+  let errorIndex = useRef(0);
 
   const [ rightActiveWord, setRightActiveWord ] = useState(wordArray[arrayIndex.current]);
   const [ leftActiveWord, setLeftActiveWord ] = useState("");
 
+  const [ wordMistake, setWordMistake ] = useState(false);
+
 
   const handleKeyStroke = (e) => {
-    let typedCharacter = e.target.value;
+    let typedCharacter = e.target.value.charAt(e.target.value.length - 1);
     document.getElementById("form-input").value = "";
 
-    let updatedRight = rightActiveWord.slice(1);
-    console.log("word, ", wordArray[arrayIndex.current].charAt(wordIndex.current));
-    console.log(`input: `, typedCharacter);
+    let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
+    
+    // Character can only be correct if there are no current errors.
+    if (errorIndex.current === 0) {
 
+       // Correct input provided.
+       if (isCorrectCharacter) {
+        let updatedRight = rightActiveWord.slice(1);
 
-    // Check for correct input.
-    if (typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current)) {
+        wordIndex.current = wordIndex.current + 1;
+            
+        if (updatedRight === "") {
+          setRightActiveWord(wordArray[arrayIndex + 1]);
+          setLeftActiveWord("")
+          arrayIndex.current = arrayIndex.current + 1;
+        } 
 
-      wordIndex.current = wordIndex.current + 1;
-          
-      if (updatedRight === "") {
-        setRightActiveWord(wordArray[arrayIndex + 1]);
-        setLeftActiveWord("")
-        arrayIndex.current = arrayIndex.current + 1;
-      } 
+        else {
+          let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
+          setRightActiveWord(updatedRight);
+          setLeftActiveWord(updatedLeft);
+        }
+      }
+
+      // Incorrect input provided.
       else {
-        let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
-        setRightActiveWord(updatedRight);
-        setLeftActiveWord(updatedLeft);
+        errorIndex.current ++;
+        console.log(errorIndex.current);
+        setLeftActiveWord(leftActiveWord + typedCharacter);
+        setWordMistake(true);
       }
     }
 
+    // If errorIndex is > 0, error must be cleared via backspace or word skipped via spacebar.
     else {
-      console.log(`wrong dude!`);
+      if (typedCharacter === '') {
+        console.log(`backspace detected...`);
+      }
+      console.log(typedCharacter);
     }
+  }
 
-
+  const handleBackspace = (e) => {
+    if (e.keyCode === 8 && !wordMistake) {
+      let updatedLeft = leftActiveWord.slice(0, -1);
+      let updatedRight = leftActiveWord.charAt(leftActiveWord.length - 1);
+      setRightActiveWord(updatedRight + rightActiveWord);
+      setLeftActiveWord(updatedLeft);
+    }
   }
 
   return (
@@ -72,7 +97,7 @@ const Practice = () => {
             else return null;
           })}
 
-          <div className="screen-word active-left"> 
+          <div className={wordMistake ? "screen-word active-left word-incorrect" : "screen-word active-left" }> 
             { leftActiveWord } 
           </div>
         </div>
@@ -100,20 +125,17 @@ const Practice = () => {
       {/* <button onClick={handleKeyStroke}> Test space </button> */}
 
       <form action='/'>
-        <input id="form-input" type="text" autoFocus className="type-text-input" onChange={(e) => {handleKeyStroke(e)}}/>
+        <input 
+          id="form-input" 
+          type="text" 
+          autoFocus 
+          className="type-text-input" 
+          onChange={handleKeyStroke}
+          onKeyDown={handleBackspace}
+        />
       </form>
     </div>
   );
 };
 
 export default Practice;
-
-// const handleIncrement = () => {
-//   setRightActiveWord(wordArray[arrayIndex + 1]);
-//   setArrayIndex(arrayIndex + 1);
-// }
-
-// const handleDecrement = () => {
-//   setRightActiveWord(wordArray[arrayIndex - 1]);
-//   setArrayIndex(arrayIndex - 1);
-// }

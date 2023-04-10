@@ -71,5 +71,5 @@
 
 .word-incorrect {
   color: red;
-  background-color: #ffcccb ;
+  text-decoration: line-through;
 }
