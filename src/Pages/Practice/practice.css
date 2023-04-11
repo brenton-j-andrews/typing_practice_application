@@ -10,8 +10,8 @@
 .typing-screen-card-wrapper {
   display: flex;
   align-items: center;
-  width: 80%;
-  height: 130px;
+  width: 90%;
+  height: 90px;
   background-color: #fff;
   padding: 5px 0px;
   border-radius: 10px;
@@ -42,7 +42,6 @@
   font-family: 'PT Mono';
   line-height: 1.5;
   margin-right: 15px;
-  /* padding-right: 15px; */
 }
 
 .active-word {

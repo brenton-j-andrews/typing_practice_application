@@ -32,3 +32,15 @@ User Experience Walkthru with guest account:
 10. User will be able to see live typing stats and remaining time above the input box.
 11. At the end of a session, a modal will pop up with session statistics, an offer to play again or return to the Staging page and a offer to create an account.
 
+
+TODO ISSUES:
+1. Hitting error while focused refreshes page and loses progress. FIX LAST, useful for now!
+2. If you complete a word, add an extra incorrect at the end (strikethru present) and then hit spacebar,  the word is falsy displayed as
+   correct.
+3. errorCounter ref increments whenever space bar is pressed.
+
+PROJECT GOALS 04.11.23:
+1. Design page layout and create / style Component skeletons.
+2. Create words.js, which will store various type practice options (such as the 50 states) and API request to random word generator.
+3. Implement Staging componenet, which allows user to select from words.js.
+  

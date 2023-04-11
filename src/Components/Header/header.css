@@ -1,0 +1,44 @@
+
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px;
+  width: 100%;
+  background-color: rgb(177, 177, 177);
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  margin: 0px 20px;
+}
+
+.header-left {
+  flex: 5;
+}
+
+.header-right {
+  flex: 3;
+  justify-content: flex-end;
+}
+
+.header-logo {
+  height: 50px;
+  width: auto;
+}
+
+.user-authentication-btn {
+  padding: 5px;
+  border: 1px solid #d5d9d9;
+  cursor: pointer;
+  color: #0f1111;
+  background-color: #fff;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.user-authentication-btn:hover {
+  background-color: #c2c2c2;
+}

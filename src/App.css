@@ -4,5 +4,10 @@
   align-items: center;
   background-color: #ececec;
   height: 100%;
+  width: 970px;
 }
 
+.app-upper {
+  width: 100%;
+  display: flex;
+}

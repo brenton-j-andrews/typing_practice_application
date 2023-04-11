@@ -1,0 +1,47 @@
+.selection-wrapper {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+  margin: 10px 5px;
+  padding: 10px 0px;
+  border-radius: 10px;
+}
+
+.upper-selection-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+}
+
+.upper-selection-difficulty-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.difficulty-selector {
+  font-size: 30px;
+  padding: 5px 10px;
+  margin: 5px 0px;
+}
+
+.time-options-wrapper {
+  display: flex;
+}
+
+.selected-time-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+}
+
+.time-arrow {
+  height: 100px;
+  width: 30px;
+  background-color: grey;
+}

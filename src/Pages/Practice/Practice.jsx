@@ -32,14 +32,15 @@ const Practice = () => {
 
     let typedCharacter = e.target.value.charAt(e.target.value.length - 1).trim();
     document.getElementById("form-input").value = ""; 
+    let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
+
+    !isCorrectCharacter && errorCount.current++;
 
     // Space bar handled in seperate function.
     if (typedCharacter === "") {
       return;
     }
 
-    let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
-    
     // If there is a typo, it must be cleared before new input can be added.
     if (!typoPresent) {
 
@@ -50,27 +51,12 @@ const Practice = () => {
         let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
 
         wordIndex.current ++;
-            
-        // If word has been spelt.
-        if (updatedRight === "") {
-          // arrayIndex.current = arrayIndex.current + 1;
-          // setRightActiveWord(wordArray[arrayIndex.current]);
-          // setLeftActiveWord("");
-          // wordIndex.current = 0;
-          setRightActiveWord(updatedRight);
-          setLeftActiveWord(updatedLeft);
-        } 
-
-        else {
-          let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
-          setRightActiveWord(updatedRight);
-          setLeftActiveWord(updatedLeft);
-        }
+        setRightActiveWord(updatedRight);
+        setLeftActiveWord(updatedLeft);
       }
 
       // Incorrect input provided.
       else {
-        console.log(`is it here?`);
         setLeftActiveWord(leftActiveWord + typedCharacter);
         setTypoPresent(true);
       }
@@ -103,9 +89,8 @@ const Practice = () => {
 
     // Spacebar key.
     if (e.keyCode === 32) {
-      if (rightActiveWord === "") {
+      if (!typoPresent) {
         wordStatusArray.current.push(true);
-        console.log(`new word time!`);
       }
       else {
         wordStatusArray.current.push(false);
@@ -115,6 +100,7 @@ const Practice = () => {
       setRightActiveWord(wordArray[arrayIndex.current]);
       setLeftActiveWord("");
       wordIndex.current = 0;
+      setTypoPresent(false);
     }
   } 
 
@@ -160,7 +146,7 @@ const Practice = () => {
               )
             }
             else return null;
-            })}
+          })}
         </div>
       </div>
 

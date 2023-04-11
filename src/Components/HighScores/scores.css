@@ -1,0 +1,8 @@
+.scores-wrapper {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+  margin: 10px 5px;
+}
