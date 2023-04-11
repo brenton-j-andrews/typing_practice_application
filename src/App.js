@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from './Components/Header/Header';
 import Selection from './Components/Selection/Selection';
 import Scores from './Components/HighScores/Scores';
+import Controls from "./Components/Controls/Controls"
 import Practice from './Pages/Practice/Practice';
 
 import './App.css';
@@ -31,7 +32,8 @@ function App() {
         <Scores />
       </div>
 
-      {/* <Practice /> */}
+      <Controls />
+      <Practice />
 
     </div>
   );

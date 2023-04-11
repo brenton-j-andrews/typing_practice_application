@@ -19,9 +19,15 @@ const Selection = ({
 
   const levelSelectionOptions = ["US States", "Countries of the World", "One to One hundred"];
 
+  const handleDifficultyClick = (difficulty) => {
+    setSelectedArrayName(null);
+    setTypingDifficulty(difficulty);
+  }
+
   const handleDropdownClick = (levelName) => {
     setDisplayLevelDropdown(false);
     setSelectedArrayName(levelName);
+    setTypingDifficulty(null);
   } 
 
   return (
@@ -36,7 +42,7 @@ const Selection = ({
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {setTypingDifficulty("easy")}}
+            onClick={() => {handleDifficultyClick("easy")}}
           >
             Easy
           </button>
@@ -46,7 +52,7 @@ const Selection = ({
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {setTypingDifficulty("medium")}}
+            onClick={() => {handleDifficultyClick("medium")}}
           >
             Medium
           </button>
@@ -56,7 +62,7 @@ const Selection = ({
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {setTypingDifficulty("hard")}}
+            onClick={() => {handleDifficultyClick("hard")}}
           >
             Hard
           </button>
@@ -96,7 +102,7 @@ const Selection = ({
 
       <div className="lower-selection-menu">
 
-        <div className="level-selection-wrapper">
+        <div className="level-selection-wrapper" onClick={() => {setDisplayLevelDropdown(!displayLevelDropdown)}}>
           <div className="level-selection-display">
             <span> { selectedArrayName ? selectedArrayName : "Select a challenge:" } </span>
           </div>
