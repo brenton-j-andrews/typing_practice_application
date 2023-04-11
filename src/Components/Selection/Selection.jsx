@@ -2,30 +2,50 @@
  * The selection component allows the user to select a 'level' and time setting for the typing challenge.
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 
 import "./selection.css";
 
-const Selection = ({ typingTime, setTypingTime }) => {
-
-  const handleTimeChange = () => {
-
-  }
+const Selection = ({ 
+  typingDifficulty, 
+  setTypingDifficulty, 
+  typingTime, 
+  setTypingTime 
+}) => {
 
   return (
     <div className='selection-wrapper'>
       <div className="upper-selection-menu">
 
         <div className="upper-selection-difficulty-options">
-          <button className="difficulty-selector">
+          <button 
+          className={
+            typingDifficulty === "easy" 
+            ? "difficulty-selector selected" 
+            : "difficulty-selector"
+            }
+            onClick={() => {setTypingDifficulty("easy")}}
+          >
             Easy
           </button>
 
-          <button className="difficulty-selector">
+          <button className={
+            typingDifficulty === "medium" 
+            ? "difficulty-selector selected" 
+            : "difficulty-selector"
+            }
+            onClick={() => {setTypingDifficulty("medium")}}
+          >
             Medium
           </button>
 
-          <button className="difficulty-selector">
+          <button className={
+            typingDifficulty === "hard" 
+            ? "difficulty-selector selected" 
+            : "difficulty-selector"
+            }
+            onClick={() => {setTypingDifficulty("hard")}}
+          >
             Hard
           </button>
         </div>
@@ -34,16 +54,28 @@ const Selection = ({ typingTime, setTypingTime }) => {
 
           <div className="time-options-wrapper">
 
-            <div className="time-decrement time-arrow"> </div>
-
+            <div className="selector-arrow-wrapper">
+              {typingTime > 1 && 
+                <div 
+                  className="selector-arrow arrow-left" 
+                  onClick={() => {setTypingTime(typingTime - 1)}}
+                />
+              }
+            </div>
+            
+            
             <div className="selected-time-display">
-              <h3>1</h3>
-              <br />
-              <h3> Minute </h3>
+              <span> { typingTime } {typingTime === 1 ? "minute" : "minutes"} </span> 
             </div>
 
-            <div className="time-increment time-arrow"></div>
-
+            <div className="selector-arrow-wrapper">
+              {typingTime < 3 && 
+                <div 
+                  className="selector-arrow arrow-right" 
+                  onClick={() => {setTypingTime(typingTime + 1)}}
+                />
+              }
+            </div>
           </div>
         </div>
       </div>

@@ -27,8 +27,13 @@
   margin: 5px 0px;
 }
 
+.selected {
+  background-color: red;
+}
+
 .time-options-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .selected-time-display {
@@ -40,8 +45,29 @@
   background-color: white;
 }
 
-.time-arrow {
+.time-selector-wrapper {
   height: 100px;
   width: 30px;
-  background-color: grey;
+}
+
+.selector-arrow-wrapper {
+  width: 30px;
+}
+
+.selector-arrow {
+  height: 0px;
+  width: 0px;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  cursor: pointer;
+}
+
+.arrow-left {  
+  margin-right: 5px;
+  border-right: 25px solid black;
+}
+
+.arrow-right {
+  margin-left: 5px;
+  border-left: 25px solid black;
 }
