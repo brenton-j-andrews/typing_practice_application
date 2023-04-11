@@ -4,14 +4,20 @@
 
 import React, { useState, useRef } from 'react';
 
+import StatusBar from '../../Components/StatusBar/StatusBar';
+
 import "./practice.css";
 
 const Practice = () => {
 
   let wordArray = ["hello", "world", "I", "am", "Brenton", "J", "Andrews"];
-
+ 
   let arrayIndex = useRef(0);
   let wordIndex = useRef(0);
+
+  // Stat variables.
+  let errorCount = useRef(0);
+  let characterCount = useRef(0);
 
   // Tracks whether a word was spelt correctly or not for left display rendering.
   let wordStatusArray = useRef([]);
@@ -99,6 +105,7 @@ const Practice = () => {
     if (e.keyCode === 32) {
       if (rightActiveWord === "") {
         wordStatusArray.current.push(true);
+        console.log(`new word time!`);
       }
       else {
         wordStatusArray.current.push(false);
@@ -111,14 +118,16 @@ const Practice = () => {
     }
   } 
 
+  const focusOnHiddenInput = () => {
+    document.getElementById("form-input").focus(); 
+  }
+
   return (
     <div className="practice-page-wrapper">
 
-      <div className="practice-page-bar">
-        This will be the status bar! Will include a countdown timer and session reset button.
-      </div>
+      <StatusBar />
 
-      <div className="typing-screen-card-wrapper" style={{ marginTop : '50px'}}>
+      <div className="typing-screen-card-wrapper" onClick={focusOnHiddenInput} style={{ marginTop : '50px'}}>
         
         <div className="screen-card-content-left">
           {wordArray.map((word, index) => {

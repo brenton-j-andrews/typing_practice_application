@@ -1,0 +1,46 @@
+.status-bar-wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.status-bar-timer {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.timer-label {
+  font-size: 60px;
+}
+
+.stats-display-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+  width: 150px;
+  height: 150px;
+}
+
+.stats-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  margin-bottom: 5px;
+  border-radius: 25px;
+  background-color: white;
+  font-size: 60px;
+}
+
+.stats-label {
+  font-size: 14px;
+}
