@@ -8,12 +8,13 @@ import "./practice.css";
 
 const Practice = () => {
 
-
-  let wordArray = ["hello ", "world ", "I ", "am ", "Brenton ", "J ", "Andrews "];
+  let wordArray = ["hello", "world", "I", "am", "Brenton", "J", "Andrews"];
 
   let arrayIndex = useRef(0);
-  let wordIndex = useRef(0)
-  let errorIndex = useRef(0);
+  let wordIndex = useRef(0);
+
+  // Tracks whether a word was spelt correctly or not for left display rendering.
+  let wordStatusArray = useRef([]);
 
   const [ rightActiveWord, setRightActiveWord ] = useState(wordArray[arrayIndex.current]);
   const [ leftActiveWord, setLeftActiveWord ] = useState("");
@@ -21,25 +22,37 @@ const Practice = () => {
   const [ typoPresent, setTypoPresent ] = useState(false);
 
 
-  const handleKeyStroke = (e) => {
-    let typedCharacter = e.target.value.charAt(e.target.value.length - 1);
-    document.getElementById("form-input").value = "";
+  const handleInput  = (e) => {
+
+    let typedCharacter = e.target.value.charAt(e.target.value.length - 1).trim();
+    document.getElementById("form-input").value = ""; 
+
+    // Space bar handled in seperate function.
+    if (typedCharacter === "") {
+      return;
+    }
 
     let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
     
-    // Character can only be correct if there are no current errors.
+    // If there is a typo, it must be cleared before new input can be added.
     if (!typoPresent) {
 
        // Correct input provided.
        if (isCorrectCharacter) {
+        
         let updatedRight = rightActiveWord.slice(1);
+        let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
 
-        wordIndex.current = wordIndex.current + 1;
+        wordIndex.current ++;
             
+        // If word has been spelt.
         if (updatedRight === "") {
-          setRightActiveWord(wordArray[arrayIndex + 1]);
-          setLeftActiveWord("")
-          arrayIndex.current = arrayIndex.current + 1;
+          // arrayIndex.current = arrayIndex.current + 1;
+          // setRightActiveWord(wordArray[arrayIndex.current]);
+          // setLeftActiveWord("");
+          // wordIndex.current = 0;
+          setRightActiveWord(updatedRight);
+          setLeftActiveWord(updatedLeft);
         } 
 
         else {
@@ -51,15 +64,14 @@ const Practice = () => {
 
       // Incorrect input provided.
       else {
-        // errorIndex.current ++;
-        // console.log(errorIndex.current);
+        console.log(`is it here?`);
         setLeftActiveWord(leftActiveWord + typedCharacter);
         setTypoPresent(true);
       }
     }
   }
 
-  const handleBackspace = (e) => {
+  const handleSpaceAndBackspace = (e) => {
 
     // Backspace key.
     if (e.keyCode === 8) {
@@ -71,7 +83,9 @@ const Practice = () => {
         let updatedRight = leftActiveWord.charAt(leftActiveWord.length - 1);
         setRightActiveWord(updatedRight + rightActiveWord);
         setLeftActiveWord(updatedLeft);
-        wordIndex.current --;
+        if (wordIndex.current > 0) {
+          wordIndex.current --;
+        }
       }
 
       // Clear erroneous characters.
@@ -79,6 +93,21 @@ const Practice = () => {
         setLeftActiveWord(updatedLeft);
         setTypoPresent(false);
       } 
+    }
+
+    // Spacebar key.
+    if (e.keyCode === 32) {
+      if (rightActiveWord === "") {
+        wordStatusArray.current.push(true);
+      }
+      else {
+        wordStatusArray.current.push(false);
+      }
+
+      arrayIndex.current++;
+      setRightActiveWord(wordArray[arrayIndex.current]);
+      setLeftActiveWord("");
+      wordIndex.current = 0;
     }
   } 
 
@@ -95,7 +124,7 @@ const Practice = () => {
           {wordArray.map((word, index) => {
             if (index < arrayIndex.current) {
               return (
-                <div className="screen-word word-correct">
+                <div className={wordStatusArray.current[index] ? "screen-word word-correct" : "screen-word word-incorrect"} key={word + index}>
                   { word }
                 </div>
               )
@@ -116,7 +145,7 @@ const Practice = () => {
           {wordArray.map((word, index) => {
             if (index > arrayIndex.current) {
               return (
-                <span className="screen-word">
+                <span className="screen-word" key={word + index}>
                   { word }
                 </span>
               )
@@ -132,8 +161,8 @@ const Practice = () => {
           type="text" 
           autoFocus 
           className="type-text-input" 
-          onChange={handleKeyStroke}
-          onKeyDown={handleBackspace}
+          onChange={handleInput}
+          onKeyDown={handleSpaceAndBackspace}
         />
       </form>
     </div>
