@@ -10,11 +10,8 @@ import './App.css';
 function App() {
 
   const [ typingDifficulty, setTypingDifficulty ] = useState("easy");
-  const [ typingTime, setTypingTime ] = useState(1);
-
-  useEffect(() => {
-    console.log(typingDifficulty, typingTime);
-  }, [ typingDifficulty, typingTime ]);
+  const [ typingDuration, setTypingDuration ] = useState(1);
+  const [ selectedArrayName, setSelectedArrayName ] = useState();
 
   return (
     <div className="app-wrapper">
@@ -24,13 +21,18 @@ function App() {
         <Selection 
           typingDifficulty={typingDifficulty}
           setTypingDifficulty={setTypingDifficulty}
-          typingTime={typingTime}
-          setTypingTime={setTypingTime}
+
+          typingDuration={typingDuration}
+          setTypingDuration={setTypingDuration}
+
+          selectedArrayName={selectedArrayName}
+          setSelectedArrayName={setSelectedArrayName}
         />
         <Scores />
       </div>
 
-      <Practice />
+      {/* <Practice /> */}
+
     </div>
   );
 }

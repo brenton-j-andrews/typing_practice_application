@@ -2,21 +2,33 @@
  * The selection component allows the user to select a 'level' and time setting for the typing challenge.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import "./selection.css";
 
 const Selection = ({ 
   typingDifficulty, 
   setTypingDifficulty, 
-  typingTime, 
-  setTypingTime 
+  typingDuration, 
+  setTypingDuration,
+  selectedArrayName,
+  setSelectedArrayName
 }) => {
+
+  const [ displayLevelDropdown, setDisplayLevelDropdown ] = useState(false);
+
+  const levelSelectionOptions = ["US States", "Countries of the World", "One to One hundred"];
+
+  const handleDropdownClick = (levelName) => {
+    setDisplayLevelDropdown(false);
+    setSelectedArrayName(levelName);
+  } 
 
   return (
     <div className='selection-wrapper'>
-      <div className="upper-selection-menu">
+      <span className='selection-prompt'> Select a difficulty and time: </span>
 
+      <div className="upper-selection-menu">
         <div className="upper-selection-difficulty-options">
           <button 
           className={
@@ -55,29 +67,58 @@ const Selection = ({
           <div className="time-options-wrapper">
 
             <div className="selector-arrow-wrapper">
-              {typingTime > 1 && 
+              {typingDuration > 1 && 
                 <div 
                   className="selector-arrow arrow-left" 
-                  onClick={() => {setTypingTime(typingTime - 1)}}
+                  onClick={() => {setTypingDuration(typingDuration - 1)}}
                 />
               }
             </div>
             
             
             <div className="selected-time-display">
-              <span> { typingTime } {typingTime === 1 ? "minute" : "minutes"} </span> 
+              <span> { typingDuration } {typingDuration === 1 ? "minute" : "minutes"} </span> 
             </div>
 
             <div className="selector-arrow-wrapper">
-              {typingTime < 3 && 
+              {typingDuration < 3 && 
                 <div 
                   className="selector-arrow arrow-right" 
-                  onClick={() => {setTypingTime(typingTime + 1)}}
+                  onClick={() => {setTypingDuration(typingDuration + 1)}}
                 />
               }
             </div>
           </div>
         </div>
+      </div>
+
+      <span className='selection-prompt'> Or see how fast you can type out the challenges below! </span>
+
+      <div className="lower-selection-menu">
+
+        <div className="level-selection-wrapper">
+          <div className="level-selection-display">
+            <span> { selectedArrayName ? selectedArrayName : "Select a challenge:" } </span>
+          </div>
+          <div className="dropdown-toggle" onClick={() => {setDisplayLevelDropdown(!displayLevelDropdown)}}/>
+        </div> 
+        
+        {displayLevelDropdown &&
+          <ul className="level-selection-dropdown">
+            {levelSelectionOptions.map((level, index) => {
+
+              return (
+                <li 
+                  className='level-item' 
+                  key={crypto.randomUUID()}
+                  onClick={() => {handleDropdownClick(level)}}
+                > 
+                  {level} 
+                </li>
+              )
+            })}
+          </ul>
+        }
       </div>
     </div>
   );
