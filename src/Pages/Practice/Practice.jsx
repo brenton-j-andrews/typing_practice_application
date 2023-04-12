@@ -2,7 +2,7 @@
  * The practice page will render the typing speed test and track all data associated with a single practice session.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { fetchBuiltInArray, fetchAsyncArray } from "../../utilities/challengeArrGenerator"
 
 import StatusBar from '../../Components/StatusBar/StatusBar';
@@ -16,10 +16,13 @@ const Practice = ({
   selectedArrayName 
 }) => {
 
-  const [ loading, setLoading ] = useState(true);
   const [ wordArray, setWordArray ] = useState();
 
-  // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.a
+  // Session Stat tracking.
+  let [ characterCount, setCharacterCount ] = useState(0)
+  let [ errorCount, setErrorCount ] = useState(0);
+
+  // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.
   useEffect(() => {
     const fetchData = async () => {
       let response = await axios.get("https://random-word-api.vercel.app/api?words=10");
@@ -34,18 +37,22 @@ const Practice = ({
     }
   }, [ selectedArrayName ]);
 
-
-
-
-
   return (
     <div className="practice-page-wrapper">
-      <button onClick={() => {setLoading(!loading)}}> tOGGLE </button>
-      <StatusBar />
+      <StatusBar 
+        typingDifficulty={typingDifficulty}
+        typingDuration={typingDuration}
+      />
       
       {wordArray  
         ? 
-        <TypingScreen wordArray={wordArray} />
+        <TypingScreen 
+          wordArray={wordArray} 
+          characterCount={characterCount}
+          setCharacterCount={setCharacterCount}
+          errorCount={errorCount}
+          setErrorCount={setErrorCount}
+        />
         :
         <div className="typing-screen-card-wrapper"> Loading... </div>
       }

@@ -2,12 +2,17 @@ import React, { useState, useRef } from 'react';
 
 import "./typing_screen.css";
 
-const TypingScreen = ({ wordArray }) => {
+const TypingScreen = ({ 
+  wordArray, 
+  characterCount, 
+  setCharacterCount,
+  errorCount,
+  setErrorCount
+}) => {
 
   let arrayIndex = useRef(0);
   let wordIndex = useRef(0);
 
-  let errorCount = useRef(0);
 
   let wordStatusArray = useRef([]);
 
@@ -17,24 +22,15 @@ const TypingScreen = ({ wordArray }) => {
   const [ typoPresent, setTypoPresent ] = useState(false);
 
   const handleInput  = (e) => {
-
     let typedCharacter = e.target.value.charAt(e.target.value.length - 1).trim();
+    
     document.getElementById("form-input").value = ""; 
+    if (typedCharacter === "") return;
     let isCorrectCharacter = typedCharacter === wordArray[arrayIndex.current].charAt(wordIndex.current);
 
-    !isCorrectCharacter && errorCount.current++;
-
-    // Space bar handled in seperate function.
-    if (typedCharacter === "") {
-      return;
-    }
-
-    // If there is a typo, it must be cleared before new input can be added.
     if (!typoPresent) {
-
-       // Correct input provided.
        if (isCorrectCharacter) {
-        
+        setCharacterCount(characterCount + 1);
         let updatedRight = rightActiveWord.slice(1);
         let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
 
@@ -43,8 +39,8 @@ const TypingScreen = ({ wordArray }) => {
         setLeftActiveWord(updatedLeft);
       }
 
-      // Incorrect input provided.
       else {
+        setErrorCount(errorCount + 1);
         setLeftActiveWord(leftActiveWord + typedCharacter);
         setTypoPresent(true);
       }
@@ -53,9 +49,8 @@ const TypingScreen = ({ wordArray }) => {
 
   const handleSpaceAndBackspace = (e) => {
 
-    // Backspace key.
+    // Backspace key
     if (e.keyCode === 8) {
-
       let updatedLeft = leftActiveWord.slice(0, -1);
 
       // Clear correct characters.
@@ -77,18 +72,20 @@ const TypingScreen = ({ wordArray }) => {
 
     // Spacebar key.
     if (e.keyCode === 32) {
-      if (!typoPresent) {
+      if (!typoPresent && rightActiveWord === "") {
         wordStatusArray.current.push(true);
-      }
+        setCharacterCount(characterCount + 1);
+        arrayIndex.current++;
+        setRightActiveWord(wordArray[arrayIndex.current]);
+        setLeftActiveWord("");
+        wordIndex.current = 0;
+        setTypoPresent(false);
+      } 
       else {
-        wordStatusArray.current.push(false);
-      }
-
-      arrayIndex.current++;
-      setRightActiveWord(wordArray[arrayIndex.current]);
-      setLeftActiveWord("");
-      wordIndex.current = 0;
-      setTypoPresent(false);
+        setErrorCount(errorCount + 1);
+        setLeftActiveWord(leftActiveWord + "_"); 
+        setTypoPresent(true);
+      }     
     }
   } 
 

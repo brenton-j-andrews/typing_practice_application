@@ -2,6 +2,7 @@
   width: 80%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .status-bar-timer {
@@ -19,28 +20,14 @@
   font-size: 40px;
 }
 
-.stats-display-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 10px;
-  width: 100px;
-  height: 100px;
+.status-bar-title {
+  text-align: center;
 }
 
-.stats-display {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 75%;
-  width: 75%;
-  margin-bottom: 5px;
-  border-radius: 25px;
-  background-color: rgb(177, 177, 177);
-  font-size: 45px;
-}
-
-.stats-label {
-  font-size: 14px;
+.status-action-btn {
+  font-size: 30px;
+  padding: 5px 10px;
+  margin: 5px 0px;
+  width: 120px;
+  margin: 0px 5px;
 }
