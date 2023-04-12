@@ -3,13 +3,15 @@
  * Arrays used for non random word challenges are built in, random word arrays are constructed via API. 
  **/
 
+import axios from "axios";
+
 const storedArrays = {
   us_states : [
     'Alabama','Alaska','Arizona','Arkansas','California',
     'Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii',
     'Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana',
     'Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi',
-    'Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey',
+    'Missouri','Montana','Nebraska','Nevada','New_Hampshire','New Jersey',
     'New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma',
     'Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee',
     'Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'
@@ -18,9 +20,18 @@ const storedArrays = {
   south_american_countries : [
     "Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "French Guiana",
     "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"
+  ],
+
+  european_countries : ["Albania", "Andorra", "Armenia", "Austria", "Azerbaijan",
+   "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus",
+    "Czechia", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", 
+    "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia", "Liechtenstein",
+    "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", 
+    "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino", 
+    "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", 
+    "United Kingdom", "Vatican City"
   ]
 }
-
 
 const generate1To100 = () => {
   let arr = [];
@@ -31,19 +42,15 @@ const generate1To100 = () => {
   return arr;
 }
 
-const fetchChallengeArray = (typingDifficulty, typingDuration, selectedArrayName) => {
-
-  if (selectedArrayName) {
-    let key = selectedArrayName.toLowerCase().replaceAll(" ", "_");
-    console.log(key);
-    if (key === 'one_to_one_hundred') { 
-      let arr = generate1To100();
-      return arr;
-    }
-    else {
-      return storedArrays[key];
-    }
+const fetchBuiltInArray = (selectedArrayName) => {
+  let key = selectedArrayName.toLowerCase().replaceAll(" ", "_");
+  
+  if (key === 'one_to_one_hundred') { 
+    let arr = generate1To100();
+    return arr;
+  } else {
+    return storedArrays[key];
   }
 }
 
-export { fetchChallengeArray };
+export { fetchBuiltInArray };

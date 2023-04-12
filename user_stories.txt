@@ -38,9 +38,9 @@ TODO ISSUES:
 2. If you complete a word, add an extra incorrect at the end (strikethru present) and then hit spacebar,  the word is falsy displayed as
    correct.
 3. errorCounter ref increments whenever space bar is pressed.
+4. Grouped words (like "New Hampshire") don't work right now. Maybe once space bar functionality is working?
 
 PROJECT GOALS 04.11.23:
 1. Design page layout and create / style Component skeletons.
 2. Create words.js, which will store various type practice options (such as the 50 states) and API request to random word generator.
 3. Implement Staging componenet, which allows user to select from words.js.
-  

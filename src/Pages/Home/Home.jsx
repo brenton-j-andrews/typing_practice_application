@@ -41,7 +41,6 @@ const Home = ({
           Start Challenge
         </button>
       </Link>
-
     </div>
   );
 };
