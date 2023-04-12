@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import Selection from '../../Components/Selection/Selection';
 import Scores from '../../Components/HighScores/Scores';
@@ -16,8 +17,7 @@ const Home = ({
 
   return (
     <div className="home-wrapper">
-
-       <div className="home-upper">
+      <div className="home-upper">
         <Selection 
           typingDifficulty={typingDifficulty}
           setTypingDifficulty={setTypingDifficulty}
@@ -36,9 +36,12 @@ const Home = ({
         />
       </div>
 
-      <button className="start-btn" disabled={false}>
-        Start Practice
-      </button>
+      <Link to="/practice">
+        <button className="start-btn" disabled={false}>
+          Start Challenge
+        </button>
+      </Link>
+
     </div>
   );
 };

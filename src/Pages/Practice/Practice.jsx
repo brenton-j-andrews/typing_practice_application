@@ -3,15 +3,21 @@
  */
 
 import React, { useState, useRef } from 'react';
+import { fetchChallengeArray } from "../../utilities/challengerArrGenerator"
 
 import StatusBar from '../../Components/StatusBar/StatusBar';
-
 import "./practice.css";
 
-const Practice = () => {
 
-  let wordArray = ["hello", "world", "I", "am", "Brenton", "J", "Andrews"];
- 
+const Practice = ({ 
+  typingDifficulty, 
+  typingDuration, 
+  selectedArrayName 
+}) => {
+
+  console.log(selectedArrayName);
+  let wordArray = fetchChallengeArray(typingDifficulty, typingDuration, selectedArrayName);
+
   let arrayIndex = useRef(0);
   let wordIndex = useRef(0);
 
