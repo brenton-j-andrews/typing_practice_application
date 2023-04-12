@@ -38,31 +38,31 @@ const Selection = ({
         <div className="upper-selection-difficulty-options">
           <button 
           className={
-            typingDifficulty === "easy" 
+            typingDifficulty === "Easy" 
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {handleDifficultyClick("easy")}}
+            onClick={() => {handleDifficultyClick("Easy")}}
           >
             Easy
           </button>
 
           <button className={
-            typingDifficulty === "medium" 
+            typingDifficulty === "Medium" 
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {handleDifficultyClick("medium")}}
+            onClick={() => {handleDifficultyClick("Medium")}}
           >
             Medium
           </button>
 
           <button className={
-            typingDifficulty === "hard" 
+            typingDifficulty === "Hard" 
             ? "difficulty-selector selected" 
             : "difficulty-selector"
             }
-            onClick={() => {handleDifficultyClick("hard")}}
+            onClick={() => {handleDifficultyClick("Hard")}}
           >
             Hard
           </button>
@@ -76,7 +76,7 @@ const Selection = ({
               {typingDuration > 1 && 
                 <div 
                   className="selector-arrow arrow-left" 
-                  onClick={() => {setTypingDuration(typingDuration - 1)}}
+                  onClick={() => {setTypingDuration(typingDuration - 2)}}
                 />
               }
             </div>
@@ -87,10 +87,10 @@ const Selection = ({
             </div>
 
             <div className="selector-arrow-wrapper">
-              {typingDuration < 3 && 
+              {typingDuration < 5 && 
                 <div 
                   className="selector-arrow arrow-right" 
-                  onClick={() => {setTypingDuration(typingDuration + 1)}}
+                  onClick={() => {setTypingDuration(typingDuration + 2)}}
                 />
               }
             </div>

@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Header from './Components/Header/Header';
-import Selection from './Components/Selection/Selection';
-import Scores from './Components/HighScores/Scores';
-import Controls from "./Components/Controls/Controls"
-import Practice from './Pages/Practice/Practice';
+import Home from "./Pages/Home/Home";
 
 import './App.css';
 
 function App() {
 
-  const [ typingDifficulty, setTypingDifficulty ] = useState("easy");
+  const [ typingDifficulty, setTypingDifficulty ] = useState("Easy");
   const [ typingDuration, setTypingDuration ] = useState(1);
   const [ selectedArrayName, setSelectedArrayName ] = useState();
 
@@ -18,23 +15,17 @@ function App() {
     <div className="app-wrapper">
       <Header />
 
-      <div className="app-upper">
-        <Selection 
-          typingDifficulty={typingDifficulty}
-          setTypingDifficulty={setTypingDifficulty}
+      <Home 
+        typingDifficulty={typingDifficulty}
+        setTypingDifficulty={setTypingDifficulty}
 
-          typingDuration={typingDuration}
-          setTypingDuration={setTypingDuration}
+        typingDuration={typingDuration}
+        setTypingDuration={setTypingDuration}
 
-          selectedArrayName={selectedArrayName}
-          setSelectedArrayName={setSelectedArrayName}
+        selectedArrayName={selectedArrayName}
+        setSelectedArrayName={setSelectedArrayName}
         />
-        <Scores />
-      </div>
-
-      <Controls />
-      <Practice />
-
+        
     </div>
   );
 }
