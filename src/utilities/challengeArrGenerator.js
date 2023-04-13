@@ -3,8 +3,6 @@
  * Arrays used for non random word challenges are built in, random word arrays are constructed via API. 
  **/
 
-import axios from "axios";
-
 const storedArrays = {
   us_states : [
     'Alabama','Alaska','Arizona','Arkansas','California',

@@ -1,21 +1,31 @@
 import React from 'react';
 
+import CountDown from '../CountDown/CountDown';
+
 import "./status_bar.css";
 
-const StatusBar = ({typingDuration, typingDifficulty, selectedArrayName}) => {
+const StatusBar = ({
+  typingDuration, 
+  typingDifficulty, 
+  selectedArrayName,
+  setSessionIsOver
+}) => {
 
   return (
     <div className='status-bar-wrapper'>
       <div className="status-bar-timer">
         <strong className='timer-label'> 
-          00:00
+          <CountDown 
+            typingDuration={typingDuration}
+            setSessionIsOver={setSessionIsOver}
+          />
         </strong>
       </div>
 
       <div className="status-bar-right">
 
         {selectedArrayName &&
-          <h3 className="status-bar-title"> {selectedArrayName}</h3>
+          <h3 className="status-bar-title"> {selectedArrayName} </h3>
         }
 
         {typingDifficulty &&

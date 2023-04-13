@@ -2,8 +2,8 @@
  * The practice page will render the typing speed test and track all data associated with a single practice session.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { fetchBuiltInArray, fetchAsyncArray } from "../../utilities/challengeArrGenerator"
+import React, { useState, useEffect } from 'react';
+import { fetchBuiltInArray } from "../../utilities/challengeArrGenerator"
 
 import StatusBar from '../../Components/StatusBar/StatusBar';
 import TypingScreen from '../../Components/TypingScreen/TypingScreen';
@@ -20,8 +20,11 @@ const Practice = ({
   const [ wordArray, setWordArray ] = useState();
 
   // Session Stat tracking.
-  let [ characterCount, setCharacterCount ] = useState(0)
-  let [ errorCount, setErrorCount ] = useState(0);
+  const [ characterCount, setCharacterCount ] = useState(0)
+  const [ errorCount, setErrorCount ] = useState(0);
+
+  // Track if session is over, either by running out of time or reaching end of array.
+  const [ sessionIsOver, setSessionIsOver ] = useState(false);
 
   // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.
   useEffect(() => {
@@ -38,12 +41,20 @@ const Practice = ({
     }
   }, [ selectedArrayName ]);
 
+  // Effect: on sessionIsOver, render pop-up modal to display stats and prompt.
+  useEffect(() => {
+    if (sessionIsOver) {
+      console.log("characters this session: ", characterCount);
+    }
+  }, [ sessionIsOver ]);
+
   return (
     <div className="practice-page-wrapper">
       <StatusBar 
         typingDifficulty={typingDifficulty}
         typingDuration={typingDuration}
         selectedArrayName={selectedArrayName}
+        setSessionIsOver={setSessionIsOver}
       />
 
       {wordArray  
@@ -54,6 +65,7 @@ const Practice = ({
           setCharacterCount={setCharacterCount}
           errorCount={errorCount}
           setErrorCount={setErrorCount}
+          sessionIsOver={sessionIsOver}
         />
         :
         <div className="typing-screen-card-wrapper"> 

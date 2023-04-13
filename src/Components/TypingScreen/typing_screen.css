@@ -24,6 +24,11 @@
   background-color: var(--color-base-light);
 }
 
+.typing-screen-card-wrapper.done {
+  background-color: var(--color-blue-light);
+  opacity: .75;
+}
+
 .screen-card-content-right, .screen-card-content-left {
   flex: 5;
 
@@ -76,11 +81,12 @@
 }
 
 .active-left {
+  color: var(--color-accent-green);
   margin: 0px;
 }
 
 .word-correct {
-  color: rgb(106, 153, 106);
+  color: var(--color-accent-green);
 }
 
 .word-incorrect {

@@ -7,19 +7,18 @@ const TypingScreen = ({
   characterCount, 
   setCharacterCount,
   errorCount,
-  setErrorCount
+  setErrorCount,
+  sessionIsOver
 }) => {
 
   let arrayIndex = useRef(0);
   let wordIndex = useRef(0);
 
-
-  let wordStatusArray = useRef([]);
-
   const [ rightActiveWord, setRightActiveWord ] = useState(wordArray[arrayIndex.current]);
   const [ leftActiveWord, setLeftActiveWord ] = useState("");
 
   const [ typoPresent, setTypoPresent ] = useState(false);
+
 
   const handleInput  = (e) => {
     let typedCharacter = e.target.value.charAt(e.target.value.length - 1).trim();
@@ -71,9 +70,8 @@ const TypingScreen = ({
     }
 
     // Spacebar key.
-    if (e.keyCode === 32) {
-      if (!typoPresent && rightActiveWord === "") {
-        wordStatusArray.current.push(true);
+    if (e.keyCode === 32 && !typoPresent) {
+      if (rightActiveWord === "") {
         setCharacterCount(characterCount + 1);
         arrayIndex.current++;
         setRightActiveWord(wordArray[arrayIndex.current]);
@@ -95,13 +93,16 @@ const TypingScreen = ({
 
   return (
     <div className="typing-screen-wrapper">
-      <div className="typing-screen-card-wrapper" onClick={() => {focusOnHiddenInput()}}>
+      <div 
+        className={sessionIsOver ? "typing-screen-card-wrapper done" : "typing-screen-card-wrapper"} 
+        onClick={() => {focusOnHiddenInput()}}
+      >
         <div className="screen-card-content-left">
           {wordArray.map((word, index) => {
             word = word.replace("_", " ");
             if (index < arrayIndex.current) {
               return (
-                <div className={wordStatusArray.current[index] ? "screen-word word-correct" : "screen-word word-incorrect"} key={word + index}>
+                <div className="screen-word word-correct" key={word + index}>
                   { word }
                 </div>
               )
@@ -115,7 +116,7 @@ const TypingScreen = ({
         </div>
 
         <div className="screen-card-content-right">
-          <div className="screen-word active-word"> 
+          <div className={sessionIsOver ? "screen-word" : "screen-word active-word"}> 
             { rightActiveWord } 
           </div>
 
@@ -140,6 +141,7 @@ const TypingScreen = ({
           className="type-text-input" 
           onChange={handleInput}
           onKeyDown={handleSpaceAndBackspace}
+          disabled={sessionIsOver}
         />
       </form> 
     </div>

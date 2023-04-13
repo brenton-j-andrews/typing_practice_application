@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import Selection from '../../Components/Selection/Selection';
-import Scores from '../../Components/HighScores/Scores';
+import Scores from '../../Components/Scores/Scores';
 
 import "./home.css";
 
