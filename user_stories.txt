@@ -18,6 +18,7 @@ Backend:
 1. User can create an account (w/ email verification), or sign into the app via their Google account.  
 2. User can see high scores achieved by others / themselves for selected time format.
 3. User stats page will display cumulative performance stats from all practice sessions.
+4. User can reset password via email.
 
 User Experience Walkthru with guest account:
 1. User clicks link to application and is delivered to the 'Staging' Page. 

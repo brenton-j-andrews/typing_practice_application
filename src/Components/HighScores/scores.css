@@ -26,7 +26,7 @@
   align-items: center;
 
   width: 356.8px;
-  height: 75%;
+  height: 80%;
   -webkit-box-shadow: 0px 0px 2px 2px var(--color-blue-extra-light);
   -moz-box-shadow: 0px 0px 2px 2px var(--color-blue-extra-light);
   box-shadow: 0px 0px 2px 2px var(--color-blue-extra-light);
@@ -41,10 +41,10 @@
 }
 
 .scores-table-label {
-  width: 80%;
-  padding: 3px;
+  width: 90%;
+  padding: 3px 0px;
   margin-top: 10px;
-
+  max-height: 30px;
   font-size: 20px;
   text-align: center;
 
@@ -64,9 +64,6 @@
   background-color: var(--color-base-light);
 }
 
-.scores-table{
-  border: none;
-}
 
 .col-key {
   font-weight: 700;

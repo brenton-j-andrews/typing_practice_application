@@ -26,7 +26,7 @@ const Practice = ({
   // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.
   useEffect(() => {
     const fetchData = async () => {
-      let response = await axios.get("https://random-word-api.vercel.app/api?words=10");
+      let response = await axios.get("https://random-word-api.vercel.app/api?words=100");
       setWordArray(response.data);
     }
 
