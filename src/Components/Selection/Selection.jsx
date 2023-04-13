@@ -28,20 +28,21 @@ const Selection = ({
     setDisplayLevelDropdown(false);
     setSelectedArrayName(levelName);
     setTypingDifficulty(null);
+    setTypingDuration(1);
   } 
 
   return (
     <div className='selection-wrapper'>
-      <span className='selection-prompt'> Select a difficulty and time: </span>
+      <h3 className='selection-prompt'> Difficulty and time: </h3>
 
       <div className="upper-selection-menu">
         <div className="upper-selection-difficulty-options">
           <button 
-          className={
-            typingDifficulty === "Easy" 
-            ? "difficulty-selector selected" 
-            : "difficulty-selector"
-            }
+            className={
+              typingDifficulty === "Easy" 
+              ? "difficulty-selector selected" 
+              : "difficulty-selector"
+              }
             onClick={() => {handleDifficultyClick("Easy")}}
           >
             Easy
@@ -68,37 +69,34 @@ const Selection = ({
           </button>
         </div>
 
-        <div className="upper-selection-time-options">
+        <div className="time-options-wrapper">
+          <div className="selector-arrow-wrapper">
+            {typingDuration > 1 && 
+              <div 
+                className="selector-arrow arrow-left" 
+                onClick={() => {setTypingDuration(typingDuration - 2)}}
+              />
+            }
+          </div>
+          
+          
+          <div className="selected-time-display">
+            <span className="time-display"> { typingDuration } </span> 
+            <span className="time-display">{typingDuration === 1 ? "minute" : "minutes"} </span> 
+          </div>
 
-          <div className="time-options-wrapper">
-
-            <div className="selector-arrow-wrapper">
-              {typingDuration > 1 && 
-                <div 
-                  className="selector-arrow arrow-left" 
-                  onClick={() => {setTypingDuration(typingDuration - 2)}}
-                />
-              }
-            </div>
-            
-            
-            <div className="selected-time-display">
-              <span> { typingDuration } {typingDuration === 1 ? "minute" : "minutes"} </span> 
-            </div>
-
-            <div className="selector-arrow-wrapper">
-              {typingDuration < 5 && 
-                <div 
-                  className="selector-arrow arrow-right" 
-                  onClick={() => {setTypingDuration(typingDuration + 2)}}
-                />
-              }
-            </div>
+          <div className="selector-arrow-wrapper">
+            {typingDuration < 5 && 
+              <div 
+                className="selector-arrow arrow-right" 
+                onClick={() => {setTypingDuration(typingDuration + 2)}}
+              />
+            }
           </div>
         </div>
       </div>
 
-      <span className='selection-prompt'> Or see how fast you can type out the challenges below! </span>
+      <span className='selection-prompt'> Or select a challenge: </span>
 
       <div className="lower-selection-menu">
 

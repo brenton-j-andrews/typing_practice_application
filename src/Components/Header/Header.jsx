@@ -7,9 +7,10 @@ const logo = require("../../assets/runner.png");
 
 const Header = () => {
   return (
-    <header className="app-header">
+    <header className="app-header-wrapper">
+      <div className="app-header">
         <div className="header-left">
-          <h2 className="header-title"> Typing Speed Challenge </h2>
+          <h1 className="header-title"> Typing Speed Challenge </h1>
           <img 
             className='header-logo'
             src={logo}
@@ -18,15 +19,16 @@ const Header = () => {
         </div>
 
         <div className="header-right">
-          <button className="user-authentication-btn">
+          <button className="header-btn">
             Create a Free Account
           </button>
             
-            <button className="user-authentication-btn">
-              Log In Here
+            <button className="header-btn">
+              Log In
             </button>
         </div>
-      </header>
+      </div>
+    </header>
   );
 };
 

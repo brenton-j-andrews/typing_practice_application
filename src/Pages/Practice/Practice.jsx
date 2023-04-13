@@ -9,6 +9,7 @@ import StatusBar from '../../Components/StatusBar/StatusBar';
 import TypingScreen from '../../Components/TypingScreen/TypingScreen';
 import "./practice.css";
 import axios from 'axios';
+import Loader from '../../Components/Loader/Loader';
 
 const Practice = ({ 
   typingDifficulty, 
@@ -42,8 +43,9 @@ const Practice = ({
       <StatusBar 
         typingDifficulty={typingDifficulty}
         typingDuration={typingDuration}
+        selectedArrayName={selectedArrayName}
       />
-      
+
       {wordArray  
         ? 
         <TypingScreen 
@@ -54,8 +56,10 @@ const Practice = ({
           setErrorCount={setErrorCount}
         />
         :
-        <div className="typing-screen-card-wrapper"> Loading... </div>
-      }
+        <div className="typing-screen-card-wrapper"> 
+          <Loader />
+        </div>
+      } 
 
     </div>
   );

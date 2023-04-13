@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import Loader from '../Loader/Loader';
+
 import "./scores.css";
 
 const Scores = ({ 
@@ -24,6 +26,7 @@ const Scores = ({
 
   return (
     <div className='scores-wrapper'>
+      
       <h3 className='scores-header'> High Scores: </h3>
 
       <div className="scores-table-wrapper">
@@ -34,21 +37,18 @@ const Scores = ({
 
         <div className="scores-table">
           {loadingData 
-            ? <div className="loader-wrapper">
-              <span> Loading </span>
-
-              <div className="loader" />
-            </div>
+            ? 
+              <Loader />
             : 
             <>
               <div className="score-row">
-                <div className="score-col">
+                <div className="score-col col-key">
                   Username
                 </div>
-                <div className="score-col">
+                <div className="score-col col-key">
                   WPM
                 </div>
-                <div className="score-col">
+                <div className="score-col col-key">
                   Accuracy
                 </div>
               </div>

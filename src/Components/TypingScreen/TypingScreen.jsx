@@ -93,7 +93,6 @@ const TypingScreen = ({
     document.getElementById("form-input").focus(); 
   }
 
-
   return (
     <div className="typing-screen-wrapper">
       <div className="typing-screen-card-wrapper" onClick={() => {focusOnHiddenInput()}}>

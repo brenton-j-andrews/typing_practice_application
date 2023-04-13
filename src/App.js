@@ -21,36 +21,38 @@ function App() {
     <div className="app-wrapper">
       <Header />
     
-      <BrowserRouter>
-        <Routes>
-          <Route 
-            exact path="/"
-            element={
-              <Home 
-                typingDifficulty={typingDifficulty}
-                setTypingDifficulty={setTypingDifficulty}
-        
-                typingDuration={typingDuration}
-                setTypingDuration={setTypingDuration}
-        
-                selectedArrayName={selectedArrayName}
-                setSelectedArrayName={setSelectedArrayName}
-              />
-            }
-          />
+      <div className="page-wrapper">
+        <BrowserRouter>
+          <Routes>
+            <Route 
+              exact path="/"
+              element={
+                <Home 
+                  typingDifficulty={typingDifficulty}
+                  setTypingDifficulty={setTypingDifficulty}
+          
+                  typingDuration={typingDuration}
+                  setTypingDuration={setTypingDuration}
+          
+                  selectedArrayName={selectedArrayName}
+                  setSelectedArrayName={setSelectedArrayName}
+                />
+              }
+            />
 
-          <Route
-            path="/practice"
-            element={
-              <Practice 
-                typingDifficulty={typingDifficulty}
-                typingDuration={typingDuration}
-                selectedArrayName={selectedArrayName}
-              />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/practice"
+              element={
+                <Practice 
+                  typingDifficulty={typingDifficulty}
+                  typingDuration={typingDuration}
+                  selectedArrayName={selectedArrayName}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }

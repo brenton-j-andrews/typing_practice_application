@@ -17,6 +17,7 @@ const Home = ({
 
   return (
     <div className="home-wrapper">
+      
       <div className="home-upper">
         <Selection 
           typingDifficulty={typingDifficulty}
@@ -33,11 +34,11 @@ const Home = ({
           typingDifficulty={typingDifficulty}
           typingDuration={typingDuration}
           selectedArrayName={selectedArrayName}
-        />
+        /> 
       </div>
 
       <Link to="/practice">
-        <button className="start-btn" disabled={false}>
+        <button className="start-btn" >
           Start Challenge
         </button>
       </Link>

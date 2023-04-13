@@ -1,3 +1,5 @@
+@import url("../../App.css");
+
 .typing-screen-wrapper {
   display: flex;
   flex-direction: column;
@@ -14,9 +16,9 @@
   background-color: #fff;
   padding: 5px 0px;
   border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.62);
-  -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.62);
-  box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.62);
+  -webkit-box-shadow: 0px 0px 5px 5px var(--color-base-dark);
+  -moz-box-shadow: 0px 0px 5px 5px var(--color-base-dark);
+  box-shadow: 0px 0px 5px 5px var(--color-base-dark);
 }
 
 .screen-card-content-right, .screen-card-content-left {
