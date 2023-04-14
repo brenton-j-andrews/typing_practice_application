@@ -17,7 +17,7 @@ const Selection = ({
 
   const [ displayLevelDropdown, setDisplayLevelDropdown ] = useState(false);
 
-  const levelSelectionOptions = ["US States", "South American Countries", "One to One hundred", "European Countries"];
+  const levelSelectionOptions = ["US States", "South American Countries", "One to One hundred", "European Countries", "Test Arr"];
 
   const handleDifficultyClick = (difficulty) => {
     setSelectedArrayName(null);

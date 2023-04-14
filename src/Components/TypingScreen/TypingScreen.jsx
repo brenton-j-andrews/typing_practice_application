@@ -8,7 +8,8 @@ const TypingScreen = ({
   setCharacterCount,
   errorCount,
   setErrorCount,
-  sessionIsOver
+  sessionIsOver,
+  setSessionIsOver
 }) => {
 
   let arrayIndex = useRef(0);
@@ -34,6 +35,7 @@ const TypingScreen = ({
         let updatedLeft = leftActiveWord + rightActiveWord.charAt(0);
 
         wordIndex.current ++;
+       
         setRightActiveWord(updatedRight);
         setLeftActiveWord(updatedLeft);
       }
@@ -74,6 +76,10 @@ const TypingScreen = ({
       if (rightActiveWord === "") {
         setCharacterCount(characterCount + 1);
         arrayIndex.current++;
+        if (arrayIndex.current > wordArray.length - 1) {
+          setSessionIsOver(true);
+        }
+
         setRightActiveWord(wordArray[arrayIndex.current]);
         setLeftActiveWord("");
         wordIndex.current = 0;

@@ -4,6 +4,8 @@
  **/
 
 const storedArrays = {
+  test_arr : ["one", "two", "three"],
+  
   us_states : [
     'Alabama','Alaska','Arizona','Arkansas','California',
     'Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii',

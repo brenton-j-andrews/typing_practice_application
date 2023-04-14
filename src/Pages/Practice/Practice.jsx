@@ -2,14 +2,17 @@
  * The practice page will render the typing speed test and track all data associated with a single practice session.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+
 import { fetchBuiltInArray } from "../../utilities/challengeArrGenerator"
 
 import StatusBar from '../../Components/StatusBar/StatusBar';
 import TypingScreen from '../../Components/TypingScreen/TypingScreen';
-import "./practice.css";
-import axios from 'axios';
 import Loader from '../../Components/Loader/Loader';
+import StatsDisplay from '../../Components/StatsDisplay/StatsDisplay';
+
+import "./practice.css";
 
 const Practice = ({ 
   typingDifficulty, 
@@ -20,6 +23,8 @@ const Practice = ({
   const [ wordArray, setWordArray ] = useState();
 
   // Session Stat tracking.
+  let sessionTime = useRef(Date.now());
+
   const [ characterCount, setCharacterCount ] = useState(0)
   const [ errorCount, setErrorCount ] = useState(0);
 
@@ -44,7 +49,11 @@ const Practice = ({
   // Effect: on sessionIsOver, render pop-up modal to display stats and prompt.
   useEffect(() => {
     if (sessionIsOver) {
-      console.log("characters this session: ", characterCount);
+      sessionTime.current = Date.now() - sessionTime.current;
+      console.log(errorCount);
+      console.log(characterCount);
+
+      console.log();
     }
   }, [ sessionIsOver ]);
 
@@ -54,6 +63,7 @@ const Practice = ({
         typingDifficulty={typingDifficulty}
         typingDuration={typingDuration}
         selectedArrayName={selectedArrayName}
+        sessionIsOver={sessionIsOver}
         setSessionIsOver={setSessionIsOver}
       />
 
@@ -66,12 +76,20 @@ const Practice = ({
           errorCount={errorCount}
           setErrorCount={setErrorCount}
           sessionIsOver={sessionIsOver}
+          setSessionIsOver={setSessionIsOver}
         />
         :
         <div className="typing-screen-card-wrapper"> 
           <Loader />
         </div>
       } 
+
+      {sessionIsOver &&
+        <StatsDisplay 
+          characterCount={characterCount}
+          errorCount={errorCount}
+        />
+      }
 
     </div>
   );
