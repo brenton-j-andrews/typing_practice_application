@@ -48,11 +48,11 @@ const fetchBuiltInArray = (selectedArrayName) => {
   if (key === 'one_to_one_hundred') { 
     let arr = generate1To100();
     return arr;
-  } else {
+  } 
+  
+  else {
     let array = storedArrays[key];
-    console.log(array);
     const shuffledArray = array.sort((a, b) => .5 - Math.random());
-
     return shuffledArray;
   }
 }

@@ -23,7 +23,7 @@ const Practice = ({
   const [ wordArray, setWordArray ] = useState();
 
   // Session Stat tracking.
-  let sessionTime = useRef(Date.now());
+  let sessionStartTime = useRef(Date.now());
 
   const [ characterCount, setCharacterCount ] = useState(0)
   const [ errorCount, setErrorCount ] = useState(0);
@@ -49,7 +49,7 @@ const Practice = ({
   // Effect: on sessionIsOver, render pop-up modal to display stats and prompt.
   useEffect(() => {
     if (sessionIsOver) {
-      sessionTime.current = Date.now() - sessionTime.current;
+      sessionStartTime.current = Date.now() - sessionStartTime.current;
     }
   }, [ sessionIsOver ]);
 
@@ -94,6 +94,7 @@ const Practice = ({
           characterCount={characterCount}
           errorCount={errorCount}
           typingDuration={typingDuration}
+          sessionStartTime={sessionStartTime}
         />
       ) 
     }

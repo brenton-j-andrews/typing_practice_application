@@ -21,6 +21,7 @@ const Selection = ({
 
   const handleDifficultyClick = (difficulty) => {
     setSelectedArrayName(null);
+    setTypingDuration(typingDuration ? typingDuration : 1);
     setTypingDifficulty(difficulty);
   }
 
@@ -28,7 +29,7 @@ const Selection = ({
     setDisplayLevelDropdown(false);
     setSelectedArrayName(levelName);
     setTypingDifficulty(null);
-    setTypingDuration(1);
+    setTypingDuration(null);
   } 
 
   return (
@@ -74,14 +75,13 @@ const Selection = ({
             {typingDuration > 1 && 
               <div 
                 className="selector-arrow arrow-left" 
-                onClick={() => {setTypingDuration(typingDuration - 2)}}
+                onClick={() => {setTypingDuration(typingDuration ? typingDuration - 2 : 1)}}
               />
             }
           </div>
           
-          
           <div className="selected-time-display">
-            <span className="time-display"> { typingDuration } </span> 
+            <span className="time-display"> { typingDuration || '-' } </span> 
             <span className="time-display">{typingDuration === 1 ? "minute" : "minutes"} </span> 
           </div>
 
@@ -89,7 +89,7 @@ const Selection = ({
             {typingDuration < 5 && 
               <div 
                 className="selector-arrow arrow-right" 
-                onClick={() => {setTypingDuration(typingDuration + 2)}}
+                onClick={() => {setTypingDuration(typingDuration ? typingDuration + 2 : 1)}}
               />
             }
           </div>

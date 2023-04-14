@@ -1,17 +1,41 @@
 import "./stats_display.css";
 
-import React from 'react';
+import React, { useRef } from 'react';
 
-const StatsDisplay = ({ characterCount, errorCount, typingDuration }) => {
+const StatsDisplay = ({ 
+  characterCount, 
+  errorCount, 
+  typingDuration, 
+  sessionStartTime
+ }) => {
 
-  let words_per_minute = Math.floor((characterCount / 5) / typingDuration);
+  let session_duration = useRef(Date.now() - sessionStartTime.current);
+  console.log(session_duration.current);
+  let display_header = "";
+  let words_per_minute;
   let accuracy = (characterCount / (characterCount + errorCount) * 100).toFixed(1);
+
+
+  // If non fixed length session.
+  if (!typingDuration) {
+    console.log(session_duration.current);
+    let seconds = (session_duration.current / 1000).toFixed(2);
+    words_per_minute = ((60 * (characterCount / 5)) / seconds).toFixed(1);
+    display_header = `You typed at ${words_per_minute} words per minute!`
+  }
+  else {
+    words_per_minute = Math.floor((characterCount / 5) / typingDuration);
+    display_header = `You typed at ${words_per_minute} words per minute!`
+  }
+
 
   return (
     <div className="practice-stats-wrapper">
-      <h2 className="stats-header-main"> You Typed {words_per_minute } words per minute!
+      <h2 className="stats-header-main">
+        {display_header}
       </h2>
       <h3 className="stats-header-secondary"> Great Job! </h3>
+
 
       <div className="stats-display-wrapper">
         <div className="stat-wrapper">
