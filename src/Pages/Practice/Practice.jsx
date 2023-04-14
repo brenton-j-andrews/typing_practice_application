@@ -53,16 +53,6 @@ const Practice = ({
     }
   }, [ sessionIsOver ]);
 
-  // Effect: if retry btn pressed, repopulate wordArray and reinitialize everything else.
-  useEffect(() => {
-    if (resetSession) {
-      setWordArray(fetchData());
-      sessionTime.current = Date.now();
-      setCharacterCount(0);
-      setErrorCount(0);
-      setResetSession(false);
-    }
-  }, [ resetSession, fetchData ]);
 
   const renderContent = () => {
     if (!sessionIsOver) {
@@ -103,6 +93,7 @@ const Practice = ({
         <StatsDisplay 
           characterCount={characterCount}
           errorCount={errorCount}
+          typingDuration={typingDuration}
         />
       ) 
     }

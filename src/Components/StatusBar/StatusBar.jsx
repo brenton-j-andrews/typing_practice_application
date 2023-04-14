@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import Countdown from 'react-countdown';
-import { useStopwatch } from 'react-timer-hook';
+import {useStopwatch } from 'react-timer-hook';
 
 
 import "./status_bar.css";
@@ -14,35 +14,49 @@ const StatusBar = ({
   setSessionIsOver,
 }) => {
 
-  const { seconds, minutes, pause } = useStopwatch({ autoStart: true });
-
   const interval = useRef(Date.now() + (typingDuration * 60000));
 
-  // Effect: puase stopwatch timer (if applicable) on end of session.
-  useEffect(() => {
-    if (sessionIsOver) pause();
-  }, [ sessionIsOver, pause ])
+  // // Effect: puase stopwatch timer (if applicable) on end of session.
+  // useEffect(() => {
+  //   if (sessionIsOver) pause();
+  // }, [ sessionIsOver ])
 
-  const countDownRender =({ minutes, seconds }) => {
-    return <span> {minutes}:{seconds}</span>
+  // Timer functions for fixed length session.
+  const TimerFunction = () => {
+    const TimerRender = ({ minutes, seconds }) => {
+      let secondsString;
+      if (seconds < 10) {
+        secondsString = `0${seconds}`
+      }
+      return (
+        <span> {minutes}:{secondsString || seconds}</span>
+      )
+    }
+    return (
+      <Countdown 
+        date={interval.current}
+        renderer={TimerRender}
+        onComplete={() => {setSessionIsOver(true)}}
+      />
+    )
   }
+
+  // Stopwatch functions for non fixed length sessions.
+  // const { seconds, minutes, pause } = useStopwatch({ autoStart: true });
 
   return (
     <div className='status-bar-wrapper'>
       <div className="status-bar-timer">
         <strong className='timer-label'> 
 
-          {selectedArrayName && 
-            <> {minutes}:{seconds} </>
-          }
+          {/* {selectedArrayName && 
+            <p> Stopwatch! </p>
+          } */}
 
           {typingDifficulty &&
-            <Countdown 
-              date={interval.current} 
-              renderer={countDownRender}
-              onComplete={() => {setSessionIsOver(true)}}
-            />
+            TimerFunction()
           }
+
         </strong>
       </div>
 

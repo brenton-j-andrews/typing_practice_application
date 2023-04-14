@@ -2,9 +2,9 @@ import "./stats_display.css";
 
 import React from 'react';
 
-const StatsDisplay = ({ characterCount, errorCount }) => {
+const StatsDisplay = ({ characterCount, errorCount, typingDuration }) => {
 
-  let words_per_minute = Math.floor(characterCount / 5);
+  let words_per_minute = Math.floor((characterCount / 5) / typingDuration);
   let accuracy = (characterCount / (characterCount + errorCount) * 100).toFixed(1);
 
   return (
