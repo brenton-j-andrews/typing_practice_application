@@ -50,23 +50,54 @@ const Practice = ({
   useEffect(() => {
     if (sessionIsOver) {
       sessionTime.current = Date.now() - sessionTime.current;
-      console.log(errorCount);
-      console.log(characterCount);
-
-      console.log();
     }
   }, [ sessionIsOver ]);
 
+  const renderContent = () => {
+    if (!sessionIsOver) {
+      return (
+        <>
+          <StatusBar 
+            typingDifficulty={typingDifficulty}
+            typingDuration={typingDuration}
+            selectedArrayName={selectedArrayName}
+            sessionIsOver={sessionIsOver}
+            setSessionIsOver={setSessionIsOver}
+          />
+         {wordArray  ? 
+            <TypingScreen 
+              wordArray={wordArray} 
+              characterCount={characterCount}
+              setCharacterCount={setCharacterCount}
+              errorCount={errorCount}
+              setErrorCount={setErrorCount}
+              sessionIsOver={sessionIsOver}
+              setSessionIsOver={setSessionIsOver}
+            />
+            :
+            <div className="typing-screen-card-wrapper"> 
+              <Loader />
+            </div>
+          }
+        </>
+      )
+
+    }
+
+    else {
+      return (
+        <StatsDisplay 
+          characterCount={characterCount}
+          errorCount={errorCount}
+        />
+      ) 
+    }
+  }
+
   return (
     <div className="practice-page-wrapper">
-      <StatusBar 
-        typingDifficulty={typingDifficulty}
-        typingDuration={typingDuration}
-        selectedArrayName={selectedArrayName}
-        sessionIsOver={sessionIsOver}
-        setSessionIsOver={setSessionIsOver}
-      />
-
+      {renderContent()}
+{/* 
       {wordArray  
         ? 
         <TypingScreen 
@@ -89,7 +120,7 @@ const Practice = ({
           characterCount={characterCount}
           errorCount={errorCount}
         />
-      }
+      } */}
 
     </div>
   );

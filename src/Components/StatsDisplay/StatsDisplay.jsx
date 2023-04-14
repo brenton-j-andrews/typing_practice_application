@@ -9,7 +9,8 @@ const StatsDisplay = ({ characterCount, errorCount }) => {
 
   return (
     <div className="practice-stats-wrapper">
-      <h2 className="stats-header-main"> You Typed {words_per_minute} words per minute! </h2>
+      <h2 className="stats-header-main"> You Typed {words_per_minute } words per minute!
+      </h2>
       <h3 className="stats-header-secondary"> Great Job! </h3>
 
       <div className="stats-display-wrapper">
@@ -36,6 +37,19 @@ const StatsDisplay = ({ characterCount, errorCount }) => {
             <span className="stat-label"> errors </span>
           </div>
       </div>
+
+      <div className="stats-lower">
+
+        <div className="create-account-prompt">
+          Want to track your progress? Click <a className="link" href="/register">here</a> to create a free account.
+        </div>
+
+        <div className="stats-lower-btns">
+          <button className="stats-lower-btn"> Return Home</button>
+          <button className="stats-lower-btn"> Try Again </button>
+        </div>
+      </div>
+
     </div>
   );
 };

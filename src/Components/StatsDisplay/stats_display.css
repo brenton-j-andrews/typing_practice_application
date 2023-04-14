@@ -4,25 +4,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   width: 90%;
   margin-bottom: 20px;
-  font-family: 'PT Mono', monospace;
+  padding: 20px;
+  box-sizing: border-box;
+
   background-color: var(--color-base-100);
+
+  font-family: 'PT Mono', monospace;
 }
 
 .stats-header-main {
   font-size: 32px;
+  margin: 0px;
+  padding: 10px;
 }
 
 .stats-header-secondary {
   font-size: 20px;
   margin: 0px;
+  padding: 10px;
 }
 
 .stats-display-wrapper {
   display: flex;
   justify-content: space-around;
+
   width: 80%;
+  padding-bottom: 20px;
 }
 
 .stat-wrapper {
@@ -48,4 +58,54 @@
 
 .stat-label {
   margin: 10px 0px;
+}
+
+.stats-lower {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  padding: 5px 0px;
+
+  background-color: var(--color-blue-base);
+}
+
+.create-account-prompt {
+  color: white;
+}
+
+.link {
+  transition: 1s;
+  cursor: pointer;
+
+  text-decoration: none;
+  color: var(--color-base-dark)
+}
+
+.link:hover {
+  padding: 2px;
+  background-color: var(--color-base-light);
+}
+
+.stats-lower-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-lower-btn {
+  padding: 5px 10px;
+  margin: 5px 0px;
+  border: none;
+
+  background-color: var(--color-base-light);
+
+  font: inherit;
+  font-size: 20px;
+}
+
+.stats-lower-btn:hover {
+  transition: .5s;
+
+  background-color: var(--color-base-200);
 }
