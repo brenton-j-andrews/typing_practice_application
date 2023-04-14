@@ -2,7 +2,7 @@
  * The practice page will render the typing speed test and track all data associated with a single practice session.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 
 import { fetchBuiltInArray } from "../../utilities/challengeArrGenerator"
@@ -30,21 +30,21 @@ const Practice = ({
 
   // Track if session is over, either by running out of time or reaching end of array.
   const [ sessionIsOver, setSessionIsOver ] = useState(false);
+  const [ resetSession, setResetSession ] = useState(false);
 
-  // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    if (!selectedArrayName) {
       let response = await axios.get("https://random-word-api.vercel.app/api?words=100");
       setWordArray(response.data);
-    }
-
-    if (!selectedArrayName) {
-      fetchData();
-    }
-    else {
+    } else {
       setWordArray(fetchBuiltInArray(selectedArrayName));
     }
   }, [ selectedArrayName ]);
+
+  // Effect: if selectedArrayName is null, fetch random words from API for wordArray value.
+  useEffect(() => {
+    fetchData()
+  }, [ selectedArrayName, fetchData ]);
 
   // Effect: on sessionIsOver, render pop-up modal to display stats and prompt.
   useEffect(() => {
@@ -52,6 +52,17 @@ const Practice = ({
       sessionTime.current = Date.now() - sessionTime.current;
     }
   }, [ sessionIsOver ]);
+
+  // Effect: if retry btn pressed, repopulate wordArray and reinitialize everything else.
+  useEffect(() => {
+    if (resetSession) {
+      setWordArray(fetchData());
+      sessionTime.current = Date.now();
+      setCharacterCount(0);
+      setErrorCount(0);
+      setResetSession(false);
+    }
+  }, [ resetSession, fetchData ]);
 
   const renderContent = () => {
     if (!sessionIsOver) {
@@ -63,7 +74,10 @@ const Practice = ({
             selectedArrayName={selectedArrayName}
             sessionIsOver={sessionIsOver}
             setSessionIsOver={setSessionIsOver}
+            resetSession={resetSession}
+            setResetSession={setResetSession}
           />
+
          {wordArray  ? 
             <TypingScreen 
               wordArray={wordArray} 
@@ -97,31 +111,6 @@ const Practice = ({
   return (
     <div className="practice-page-wrapper">
       {renderContent()}
-{/* 
-      {wordArray  
-        ? 
-        <TypingScreen 
-          wordArray={wordArray} 
-          characterCount={characterCount}
-          setCharacterCount={setCharacterCount}
-          errorCount={errorCount}
-          setErrorCount={setErrorCount}
-          sessionIsOver={sessionIsOver}
-          setSessionIsOver={setSessionIsOver}
-        />
-        :
-        <div className="typing-screen-card-wrapper"> 
-          <Loader />
-        </div>
-      } 
-
-      {sessionIsOver &&
-        <StatsDisplay 
-          characterCount={characterCount}
-          errorCount={errorCount}
-        />
-      } */}
-
     </div>
   );
 };

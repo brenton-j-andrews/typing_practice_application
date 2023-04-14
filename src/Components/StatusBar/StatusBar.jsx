@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import CountDown from '../TimeControl/CountDown';
-
+import Countdown from 'react-countdown';
 import { useStopwatch } from 'react-timer-hook';
 
 
@@ -12,15 +11,21 @@ const StatusBar = ({
   typingDifficulty, 
   selectedArrayName,
   sessionIsOver,
-  setSessionIsOver
+  setSessionIsOver,
 }) => {
 
-  const { seconds, minutes, pause, reset } = useStopwatch({ autoStart: true });
+  const { seconds, minutes, pause } = useStopwatch({ autoStart: true });
 
+  const interval = useRef(Date.now() + (typingDuration * 60000));
+
+  // Effect: puase stopwatch timer (if applicable) on end of session.
   useEffect(() => {
     if (sessionIsOver) pause();
-  }, [ sessionIsOver ])
+  }, [ sessionIsOver, pause ])
 
+  const countDownRender =({ minutes, seconds }) => {
+    return <span> {minutes}:{seconds}</span>
+  }
 
   return (
     <div className='status-bar-wrapper'>
@@ -32,9 +37,10 @@ const StatusBar = ({
           }
 
           {typingDifficulty &&
-            <CountDown 
-              typingDuration={typingDuration}
-              setSessionIsOver={setSessionIsOver}
+            <Countdown 
+              date={interval.current} 
+              renderer={countDownRender}
+              onComplete={() => {setSessionIsOver(true)}}
             />
           }
         </strong>
@@ -53,7 +59,6 @@ const StatusBar = ({
 
         <div className="status-bar-right-lower">
           <button className="status-action-btn return"> Return </button>
-          <button className="status-action-btn reset" onClick={reset}> Reset </button>
         </div>
       </div>
     </div>
