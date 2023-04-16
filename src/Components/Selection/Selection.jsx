@@ -25,6 +25,18 @@ const Selection = ({
     setTypingDifficulty(difficulty);
   }
 
+  const handleTimeSelection = (increasing) => {
+    if (increasing) {
+      setTypingDuration(typingDuration ? typingDuration + 2 : 1)
+    }
+    else {
+      setTypingDuration(typingDuration ? typingDuration - 2 : 1)
+    }
+    setDisplayLevelDropdown(false);
+    setTypingDifficulty("Easy")
+    setSelectedArrayName(null);
+  }
+
   const handleDropdownClick = (levelName) => {
     setDisplayLevelDropdown(false);
     setSelectedArrayName(levelName);
@@ -75,7 +87,7 @@ const Selection = ({
             {typingDuration > 1 && 
               <div 
                 className="selector-arrow arrow-left" 
-                onClick={() => {setTypingDuration(typingDuration ? typingDuration - 2 : 1)}}
+                onClick={() => {handleTimeSelection(false)}}
               />
             }
           </div>
@@ -89,7 +101,7 @@ const Selection = ({
             {typingDuration < 5 && 
               <div 
                 className="selector-arrow arrow-right" 
-                onClick={() => {setTypingDuration(typingDuration ? typingDuration + 2 : 1)}}
+                onClick={() => {handleTimeSelection(true)}}
               />
             }
           </div>

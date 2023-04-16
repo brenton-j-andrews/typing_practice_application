@@ -4,8 +4,13 @@ import "./header.css";
 
 const logo = require("../../assets/runner.png");
 
+const Header = ({ setDisplayModal, setDisplayLogin }) => {
 
-const Header = () => {
+  const handleClick = (arg) => {
+    setDisplayModal(true);
+    setDisplayLogin(arg);
+  }
+
   return (
     <header className="app-header-wrapper">
       <div className="app-header">
@@ -19,11 +24,11 @@ const Header = () => {
         </div>
 
         <div className="header-right">
-          <button className="header-btn">
+          <button className="header-button" onClick={() => {handleClick(false)}}>
             Create a Free Account
           </button>
             
-            <button className="header-btn">
+            <button className="header-button" onClick={() => {handleClick(true)}}>
               Log In
             </button>
         </div>

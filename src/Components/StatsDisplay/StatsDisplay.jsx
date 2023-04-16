@@ -10,7 +10,6 @@ const StatsDisplay = ({
  }) => {
 
   let session_duration = useRef(Date.now() - sessionStartTime.current);
-  console.log(session_duration.current);
   let display_header = "";
   let words_per_minute;
   let accuracy = (characterCount / (characterCount + errorCount) * 100).toFixed(1);
@@ -18,11 +17,11 @@ const StatsDisplay = ({
 
   // If non fixed length session.
   if (!typingDuration) {
-    console.log(session_duration.current);
     let seconds = (session_duration.current / 1000).toFixed(2);
     words_per_minute = ((60 * (characterCount / 5)) / seconds).toFixed(1);
     display_header = `You typed at ${words_per_minute} words per minute!`
   }
+  
   else {
     words_per_minute = Math.floor((characterCount / 5) / typingDuration);
     display_header = `You typed at ${words_per_minute} words per minute!`

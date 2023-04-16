@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
 
-import Header from './Components/Header/Header';
 import Home from "./Pages/Home/Home";
 import Practice from "./Pages/Practice/Practice";
+import Header from './Components/Header/Header';
+import CredentialModal from "./Components/CredentialsModal/Credential";
 
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
@@ -17,9 +19,35 @@ function App() {
   const [ typingDuration, setTypingDuration ] = useState(1);
   const [ selectedArrayName, setSelectedArrayName ] = useState();
 
+  const [ displayModal, setDisplayModal ] = useState(false);
+  const [ displayLogin, setDisplayLogin ] = useState(null);
+  
+  // Effect: on change of displayModal, modify modal css to appear.
+  useEffect(() => {
+    const toggleModal = () => {
+      let modal = document.getElementById("modalWrapper");
+  
+      if (modal.style.display === "none") {
+        console.log(`display is none!`);
+        modal.style.display = "block";
+      }
+      else {
+        modal.style.display = "none";
+      }
+    }
+
+    toggleModal();
+  }, [ displayModal ]);
+
+
+
   return (
     <div className="app-wrapper">
-      <Header />
+
+      <Header 
+        setDisplayModal={setDisplayModal}
+        setDisplayLogin={setDisplayLogin}
+      />
     
       <div className="page-wrapper">
         <BrowserRouter>
@@ -52,6 +80,14 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
+      </div>
+
+      <div className="modal-wrapper" id="modalWrapper">
+        <CredentialModal 
+          displayLogin={displayLogin}
+          setDisplayLogin={setDisplayLogin}
+          setDisplayModal={setDisplayModal}
+        />
       </div>
     </div>
   );
