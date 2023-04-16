@@ -1,7 +1,6 @@
 import React from 'react';
 import "./header.css";
 
-
 const logo = require("../../assets/runner.png");
 
 const Header = ({ setDisplayModal, setDisplayLogin }) => {

@@ -29,8 +29,8 @@ const Practice = ({
   const [ errorCount, setErrorCount ] = useState(0);
 
   // Track if session is over, either by running out of time or reaching end of array.
+  const [ sessionHasStarted, setSessionHasStarted ] = useState(false);
   const [ sessionIsOver, setSessionIsOver ] = useState(false);
-  const [ resetSession, setResetSession ] = useState(false);
 
   const fetchData = useCallback(async () => {
     if (!selectedArrayName) {
@@ -64,8 +64,7 @@ const Practice = ({
             selectedArrayName={selectedArrayName}
             sessionIsOver={sessionIsOver}
             setSessionIsOver={setSessionIsOver}
-            resetSession={resetSession}
-            setResetSession={setResetSession}
+            sessionHasStarted={sessionHasStarted}
           />
 
          {wordArray  ? 
@@ -77,6 +76,8 @@ const Practice = ({
               setErrorCount={setErrorCount}
               sessionIsOver={sessionIsOver}
               setSessionIsOver={setSessionIsOver}
+              sessionHasStarted={sessionHasStarted}
+              setSessionHasStarted={setSessionHasStarted}
             />
             :
             <div className="typing-screen-card-wrapper"> 

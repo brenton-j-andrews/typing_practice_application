@@ -9,7 +9,9 @@ const TypingScreen = ({
   errorCount,
   setErrorCount,
   sessionIsOver,
-  setSessionIsOver
+  setSessionIsOver,
+  sessionHasStarted,
+  setSessionHasStarted
 }) => {
 
   let arrayIndex = useRef(0);
@@ -20,8 +22,8 @@ const TypingScreen = ({
 
   const [ typoPresent, setTypoPresent ] = useState(false);
 
-
   const handleInput  = (e) => {
+    if (!sessionHasStarted) setSessionHasStarted(true);
     let typedCharacter = e.target.value.charAt(e.target.value.length - 1).trim();
     
     document.getElementById("form-input").value = ""; 

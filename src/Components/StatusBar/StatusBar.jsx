@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Countdown from 'react-countdown';
 import {useStopwatch } from 'react-timer-hook';
@@ -11,13 +11,17 @@ const StatusBar = ({
   typingDifficulty, 
   selectedArrayName,
   setSessionIsOver,
+  sessionHasStarted
 }) => {
+
+  const [ timeStarted, setTimeStarted ] = useState(false);
 
   // Timer functions for fixed length session.
   const TimerFunction = () => {
     const interval = useRef(Date.now() + (typingDuration * 60000));
 
-    const TimerRender = ({ minutes, seconds }) => {
+    const TimerRender = ({ minutes, seconds, start }) => {
+      console.log(start);
       let secondsString;
       if (seconds < 10) {
         secondsString = `0${seconds}`
@@ -32,19 +36,27 @@ const StatusBar = ({
         date={interval.current}
         renderer={TimerRender}
         onComplete={() => {setSessionIsOver(true)}}
+        autoStart={false}
       />
     )
   }
 
+
   // Stopwatch functions for non fixed length sessions.
   const StopWatchFunction = () => {
-    const { seconds, minutes } = useStopwatch({ autoStart: true });
+    const { seconds, minutes, start } = useStopwatch({ autoStart: false });
+  
+    if (!timeStarted && sessionHasStarted) {
+      setTimeStarted(true);
+      start();
+    }
 
     const StopWatchRender = () => {
       let secondsString;
       if (seconds < 10) {
         secondsString = `0${seconds}`
       }
+
       return (
         <span> {minutes}:{secondsString || seconds}</span>
       )
@@ -54,6 +66,7 @@ const StatusBar = ({
       StopWatchRender()
     )
   }
+
 
   return (
     <div className='status-bar-wrapper'>

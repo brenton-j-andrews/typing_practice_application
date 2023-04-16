@@ -4,7 +4,7 @@ import "./credential.css";
 
 const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
 
-  const [  renderFollowUp, setRenderFollowUp ] = useState(false);
+  const [ renderFollowUp, setRenderFollowUp ] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
     
           <span className='credential-prompt'> 
             Need to register? Click
-            <a className='prompt-anchor' onClick={() => {setDisplayLogin(false)}}> here </a>
+            <span className='prompt-anchor' onClick={() => {setDisplayLogin(false)}}> here </span>
           </span>
 
           <button className='exit-btn' onClick={() => {setDisplayModal(false)}}> Close </button>
@@ -115,7 +115,7 @@ const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
 
           <span className='credential-prompt'> 
             Have an account? Log in
-            <a className='prompt-anchor' onClick={() => {setDisplayLogin(true)}}> here </a>
+            <span className='prompt-anchor' onClick={() => {setDisplayLogin(true)}}> here </span>
           </span>
           <button className='exit-btn' onClick={() => {setDisplayModal(false)}}> Close </button>
         </>

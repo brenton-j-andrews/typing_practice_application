@@ -21,12 +21,12 @@ function App() {
 
   const [ displayModal, setDisplayModal ] = useState(false);
   const [ displayLogin, setDisplayLogin ] = useState(null);
+
   
   // Effect: on change of displayModal, modify modal css to appear.
   useEffect(() => {
     const toggleModal = () => {
       let modal = document.getElementById("modalWrapper");
-  
       if (modal.style.display === "none") {
         console.log(`display is none!`);
         modal.style.display = "block";
@@ -38,8 +38,6 @@ function App() {
 
     toggleModal();
   }, [ displayModal ]);
-
-
 
   return (
     <div className="app-wrapper">
