@@ -23,7 +23,7 @@ const Practice = ({
   const [ wordArray, setWordArray ] = useState();
 
   // Session Stat tracking.
-  let sessionStartTime = useRef(Date.now());
+  let sessionStartTime = useRef(null);
 
   const [ characterCount, setCharacterCount ] = useState(0)
   const [ errorCount, setErrorCount ] = useState(0);
@@ -45,6 +45,11 @@ const Practice = ({
   useEffect(() => {
     fetchData()
   }, [ selectedArrayName, fetchData ]);
+
+  // Effect: on initial user input, get sessionStartTime.
+  useEffect(() => {
+    sessionStartTime.current = Date.now();
+  }, [ sessionHasStarted ])
 
   // Effect: on sessionIsOver, render pop-up modal to display stats and prompt.
   useEffect(() => {

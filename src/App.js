@@ -10,7 +10,6 @@ import Practice from "./Pages/Practice/Practice";
 import Header from './Components/Header/Header';
 import CredentialModal from "./Components/CredentialsModal/Credential";
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
@@ -22,13 +21,11 @@ function App() {
   const [ displayModal, setDisplayModal ] = useState(false);
   const [ displayLogin, setDisplayLogin ] = useState(null);
 
-  
   // Effect: on change of displayModal, modify modal css to appear.
   useEffect(() => {
     const toggleModal = () => {
       let modal = document.getElementById("modalWrapper");
       if (modal.style.display === "none") {
-        console.log(`display is none!`);
         modal.style.display = "block";
       }
       else {

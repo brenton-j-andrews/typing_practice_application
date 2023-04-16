@@ -33,7 +33,7 @@ const Selection = ({
       setTypingDuration(typingDuration ? typingDuration - 2 : 1)
     }
     setDisplayLevelDropdown(false);
-    setTypingDifficulty("Easy")
+    setTypingDifficulty(typingDifficulty || "Easy")
     setSelectedArrayName(null);
   }
 

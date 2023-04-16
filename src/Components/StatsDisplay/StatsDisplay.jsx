@@ -18,6 +18,7 @@ const StatsDisplay = ({
   // If non fixed length session.
   if (!typingDuration) {
     let seconds = (session_duration.current / 1000).toFixed(2);
+    console.log(seconds);
     words_per_minute = ((60 * (characterCount / 5)) / seconds).toFixed(1);
     display_header = `You typed at ${words_per_minute} words per minute!`
   }

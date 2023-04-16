@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 import Countdown from 'react-countdown';
-import {useStopwatch } from 'react-timer-hook';
+import { useTimer, useStopwatch } from 'react-timer-hook';
 
 
 import "./status_bar.css";
@@ -18,29 +18,36 @@ const StatusBar = ({
 
   // Timer functions for fixed length session.
   const TimerFunction = () => {
-    const interval = useRef(Date.now() + (typingDuration * 60000));
+    const interval = new Date();
+    interval.setSeconds(interval.getSeconds() + (typingDuration * 60));
 
-    const TimerRender = ({ minutes, seconds, start }) => {
-      console.log(start);
+    const { 
+      seconds, 
+      minutes, 
+      start 
+    } = useTimer({ expiryTimestamp:interval, autoStart: false, onExpire: () => {setSessionIsOver(true)}}); 
+
+    if (!timeStarted && sessionHasStarted) {
+      setTimeStarted(true);
+      start();
+    }
+
+    const TimeRender = () => {
       let secondsString;
+      
       if (seconds < 10) {
         secondsString = `0${seconds}`
       }
+
       return (
         <span> {minutes}:{secondsString || seconds}</span>
       )
     }
 
     return (
-      <Countdown 
-        date={interval.current}
-        renderer={TimerRender}
-        onComplete={() => {setSessionIsOver(true)}}
-        autoStart={false}
-      />
+      TimeRender()
     )
   }
-
 
   // Stopwatch functions for non fixed length sessions.
   const StopWatchFunction = () => {
@@ -66,7 +73,6 @@ const StatusBar = ({
       StopWatchRender()
     )
   }
-
 
   return (
     <div className='status-bar-wrapper'>
