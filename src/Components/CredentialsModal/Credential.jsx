@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import "./credential.css";
 
 const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
 
-  const [ renderFollowUp, setRenderFollowUp ] = useState(false);
+  const { register, formState: { errors }, handleSubmit, clearErrors } = useForm();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setRenderFollowUp(true);
-    console.log(`this is the login submit function`);
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(errors);
   }
+
+  const [ renderFollowUp, setRenderFollowUp ] = useState(false);
 
   const handleRegistration = () => {
     setRenderFollowUp(true);
-    console.log(`this is the registration submit function`);
+  }
+
+  const handleModalExit = () => {
+    let keys = Object.keys(errors)
+    keys.forEach(key => {
+      clearErrors(`${key}`);
+    })
+    setDisplayModal(false);
   }
 
   const renderLogin = () => {
@@ -22,22 +31,26 @@ const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
     const loginForm = () => {
       return (
         <>
-          <form className='credentials-form' onSubmit={handleLogin}>
-              <input 
-                className='credential-input'
-                type="text" 
-                placeholder='Username'
-              />
-    
-              <input
-                className='credential-input'
-                type="text" 
-                placeholder='Password' 
-              />
-    
-              <button className="credential-input submit" type='submit'> 
-                Log In
-              </button>
+          <form className='credentials-form' onSubmit={handleSubmit(onSubmit)}>
+            <input 
+              { ...register("userName", { required: true, maxLength: 2 })} 
+              aria-invalid={errors.userName ? "true" : "false" }
+              placeholder={(errors.userName?.type === "required" && "Username is required.") || "Username"}
+              className={errors.userName ? "credential-error" : "credential-input"}
+              type="text" 
+            />
+
+            <input 
+              {...register("password", { required: true })}
+              aria-invalid={errors.password ? "true" : "false" }
+              placeholder={(errors.password?.type === "required" && "Password is required.") || "Password"}
+              className={errors.password ? "credential-error" : "credential-input"}
+              type="text" 
+            />
+
+            <button className="credential-input submit" type='submit'> 
+              Log In
+            </button>
           </form>
     
           <span className='credential-prompt'> 
@@ -45,10 +58,8 @@ const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
             <span className='prompt-anchor' onClick={() => {setDisplayLogin(false)}}> here </span>
           </span>
 
-          <button className='exit-btn' onClick={() => {setDisplayModal(false)}}> Close </button>
+          <button className='exit-btn' onClick={handleModalExit}> Close </button>
         </>
-          
-        
       )
     }
 
@@ -158,3 +169,42 @@ const Credential = ({ displayLogin, setDisplayLogin, setDisplayModal }) => {
 };
 
 export default Credential;
+
+
+  // const INITIAL_STATE = credentialForm;
+
+  // const VALIDATION = {
+  //   username: [
+  //     { 
+  //       isValid: (value) => !!value,
+  //       message: "Username is required."
+  //     }
+  //   ],
+  //   password: [
+  //     {
+  //       isValid: (value) => !!value,
+  //       message: "Password is required."
+  //     }
+  //   ]
+  // }
+
+  // const getValidationErrors = () => {
+  //   const errors = Object.keys(credentialForm).reduce((acc, key) => {
+  //     if (!VALIDATION[key]) {
+  //       return acc;
+  //     }
+      
+  //     const fieldErrors = VALIDATION[key]
+  //     .map((validationCheck) => (
+  //       console.log(validationCheck)
+  //       {
+  //       isValid: validationCheck.isValid(credentialForm[key]),
+  //       message: validationCheck.message
+  //     }))
+  //     .filter((fieldError) => !fieldError.isValid);
+
+  //     return { ...acc, [key]: fieldErrors };
+  //   }, {})
+
+  //   return errors;
+  // }

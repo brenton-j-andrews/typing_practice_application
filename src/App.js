@@ -36,6 +36,8 @@ function App() {
     toggleModal();
   }, [ displayModal ]);
 
+
+
   return (
     <div className="app-wrapper">
 
