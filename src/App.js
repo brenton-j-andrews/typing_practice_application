@@ -36,8 +36,6 @@ function App() {
     toggleModal();
   }, [ displayModal ]);
 
-
-
   return (
     <div className="app-wrapper">
 
@@ -80,11 +78,13 @@ function App() {
       </div>
 
       <div className="modal-wrapper" id="modalWrapper">
-        <CredentialModal 
-          displayLogin={displayLogin}
-          setDisplayLogin={setDisplayLogin}
-          setDisplayModal={setDisplayModal}
-        />
+
+          <CredentialModal 
+            displayLogin={displayLogin}
+            setDisplayLogin={setDisplayLogin}
+            setDisplayModal={setDisplayModal}
+          />
+        
       </div>
     </div>
   );
