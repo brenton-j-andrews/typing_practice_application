@@ -39,7 +39,13 @@ const Login = ({ setModalMode }) => {
       setRenderFollowUp(true);
     }
     catch (error) {
-      console.log(error);
+      if (!error?.response) {
+        setErrorMessage("There is a problem with the server, try again later.");
+      } else if (error.response?.status === 401) {
+        setErrorMessage("Incorrect Credentials Provided.");
+      } else {
+        setErrorMessage("Login failed, try again later.")
+       }
     }
   }
 
