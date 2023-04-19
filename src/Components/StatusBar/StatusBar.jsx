@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-import Countdown from 'react-countdown';
 import { useTimer, useStopwatch } from 'react-timer-hook';
 
 
@@ -15,6 +15,7 @@ const StatusBar = ({
 }) => {
 
   const [ timeStarted, setTimeStarted ] = useState(false);
+  const navigate = useNavigate();
 
   // Timer functions for fixed length session.
   const TimerFunction = () => {
@@ -102,7 +103,7 @@ const StatusBar = ({
         }
 
         <div className="status-bar-right-lower">
-          <button className="status-action-btn return"> Return </button>
+          <button className="status-action-btn return" onClick={() => {navigate("/")}}> Return </button>
         </div>
       </div>
     </div>

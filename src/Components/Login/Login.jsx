@@ -33,11 +33,15 @@ const Login = ({ setModalMode }) => {
           withCredentials: true
         }
       );
-      console.log(JSON.stringify(response?.data));
+
+      const accessToken = response?.data?.accessToken;
+      console.log(accessToken);
+      setAuth({ username, password, accessToken });
       setUserName("");
       setPassword("");
       setRenderFollowUp(true);
     }
+
     catch (error) {
       if (!error?.response) {
         setErrorMessage("There is a problem with the server, try again later.");
@@ -123,4 +127,4 @@ const Login = ({ setModalMode }) => {
   );
 };
 
-export default Login
+export default Login;

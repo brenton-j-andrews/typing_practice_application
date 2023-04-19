@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -10,9 +10,14 @@ import Practice from "./Pages/Practice/Practice";
 import Header from './Components/Header/Header';
 import Modal from "./Components/Modal/Modal";
 
+import AuthContext from "./context/AuthProvider";
+
 import './App.css';
 
 function App() {
+
+  const { auth } = useContext(AuthContext);
+  console.log(auth);
 
   const [ typingDifficulty, setTypingDifficulty ] = useState("Easy");
   const [ typingDuration, setTypingDuration ] = useState(1);
@@ -44,7 +49,7 @@ function App() {
         setModalMode={setModalMode}
         setDisplayModal={setDisplayModal}
       />
-    
+
       <div className="page-wrapper">
         <BrowserRouter>
           <Routes>
