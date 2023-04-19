@@ -85,6 +85,12 @@
   box-sizing: border-box;
 }
 
+.credential-input:focus {
+  outline-style: groove;
+  outline-width: 1px;
+  outline-color: var(--color-blue-base);
+}
+
 .credential-submit {
   padding: 5px 10px;
   margin: 5px 0px;
@@ -112,5 +118,16 @@
 }
 
 .credential-prompt {
+  margin-top: 10px;
   text-align: center;
+}
+
+.modal-redirect {
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  cursor: pointer;
+
+  text-decoration: underline;
+  color: var(--color-blue-base);
 }

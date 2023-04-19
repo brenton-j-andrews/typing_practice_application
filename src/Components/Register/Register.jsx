@@ -8,7 +8,8 @@ const EMAIL_VALIDATION = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 const PASSWORD_VALIDATION = /^[\S]{8,20}$/
 const REGISTER_URL = "/register";
 
-const Register = () => {
+const Register = ({ setModalMode }) => {
+  
   const userRef = useRef();
 
   const [ username, setUserName ] = useState("");
@@ -63,7 +64,7 @@ const Register = () => {
             },
             withCredentials: true
           }
-        )
+        );
         setDisplayFollowUp(true);
 
     } catch (error) {
@@ -77,7 +78,7 @@ const Register = () => {
     }
   }
 
-  // Render Functions.
+  // Rendering Functions.
   const registerForm = () => {
     return (
       <>
@@ -126,7 +127,7 @@ const Register = () => {
                 
                 <input 
                   className="credential-input"
-                  type="text"
+                  type="password"
                   id="email"
                   ref={userRef} 
                   autoComplete="off"
@@ -152,11 +153,11 @@ const Register = () => {
 
                 <input 
                   className="credential-input"
-                  type="text"
+                  type="password"
                   id="password"
                   onChange={(e) => {setPassword(e.target.value)}}
                   value={password}
-                  autoComplete="false"
+                  autoComplete="off"
                   required
                   onFocus={() => {setPasswordFocus(true)}}
                   onBlur={() => {setPasswordFocus(false)}}
@@ -201,7 +202,7 @@ const Register = () => {
         <p className="credential-prompt">
           Already have an account?<br />
           <span className="line">
-            <a href="#">Log In Here</a>
+            <span className="modal-redirect" onClick={() => {setModalMode("login")}}>Log In Here</span>
           </span>
         </p>
       </>

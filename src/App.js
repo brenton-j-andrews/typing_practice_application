@@ -8,7 +8,7 @@ import {
 import Home from "./Pages/Home/Home";
 import Practice from "./Pages/Practice/Practice";
 import Header from './Components/Header/Header';
-import CredentialModal from "./Components/CredentialsModal/Credential";
+import Modal from "./Components/Modal/Modal";
 
 import './App.css';
 
@@ -18,8 +18,9 @@ function App() {
   const [ typingDuration, setTypingDuration ] = useState(1);
   const [ selectedArrayName, setSelectedArrayName ] = useState();
 
+  const [ modalMode, setModalMode ] = useState(null);
   const [ displayModal, setDisplayModal ] = useState(false);
-  const [ displayLogin, setDisplayLogin ] = useState(null);
+
 
   // Effect: on change of displayModal, modify modal css to appear.
   useEffect(() => {
@@ -40,8 +41,8 @@ function App() {
     <div className="app-wrapper">
 
       <Header 
+        setModalMode={setModalMode}
         setDisplayModal={setDisplayModal}
-        setDisplayLogin={setDisplayLogin}
       />
     
       <div className="page-wrapper">
@@ -79,13 +80,15 @@ function App() {
 
       <div className="modal-wrapper" id="modalWrapper">
 
-          <CredentialModal 
-            displayLogin={displayLogin}
-            setDisplayLogin={setDisplayLogin}
+          <Modal 
+            modalMode={modalMode}
+            setModalMode={setModalMode}
             setDisplayModal={setDisplayModal}
           />
         
       </div>
+
+
     </div>
   );
 }

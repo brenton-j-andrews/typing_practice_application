@@ -3,11 +3,11 @@ import "./header.css";
 
 const logo = require("../../assets/runner.png");
 
-const Header = ({ setDisplayModal, setDisplayLogin }) => {
+const Header = ({ setModalMode, setDisplayModal }) => {
 
   const handleClick = (arg) => {
+    setModalMode(arg);
     setDisplayModal(true);
-    setDisplayLogin(arg);
   }
 
   return (
@@ -23,11 +23,11 @@ const Header = ({ setDisplayModal, setDisplayLogin }) => {
         </div>
 
         <div className="header-right">
-          <button className="header-button" onClick={() => {handleClick(false)}}>
+          <button className="header-button" onClick={() => {handleClick("register")}}>
             Create a Free Account
           </button>
             
-            <button className="header-button" onClick={() => {handleClick(true)}}>
+            <button className="header-button" onClick={() => {handleClick("login")}}>
               Log In
             </button>
         </div>
