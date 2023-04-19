@@ -53,3 +53,7 @@
   display: none;
 }
 
+.error-prompt {
+  text-align: center;
+  width: 90%;
+}
