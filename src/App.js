@@ -16,9 +16,6 @@ import './App.css';
 
 function App() {
 
-  const { auth } = useContext(AuthContext);
-  console.log(auth);
-
   const [ typingDifficulty, setTypingDifficulty ] = useState("Easy");
   const [ typingDuration, setTypingDuration ] = useState(1);
   const [ selectedArrayName, setSelectedArrayName ] = useState();
@@ -92,8 +89,6 @@ function App() {
           />
         
       </div>
-
-
     </div>
   );
 }

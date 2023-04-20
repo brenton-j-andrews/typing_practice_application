@@ -1,13 +1,49 @@
-import React from 'react';
+import React, { useContext} from 'react';
+import AuthContext from '../../context/AuthProvider';
+
 import "./header.css";
 
 const logo = require("../../assets/runner.png");
 
 const Header = ({ setModalMode, setDisplayModal }) => {
 
+  const { auth } = useContext(AuthContext);
+
   const handleClick = (arg) => {
     setModalMode(arg);
     setDisplayModal(true);
+  }
+
+  const signedOutUser = () => {
+    return (
+      <>
+        <button className="header-button" onClick={() => {handleClick("register")}}>
+          Create a Free Account
+        </button>
+          
+        <button className="header-button" onClick={() => {handleClick("login")}}>
+          Log In
+        </button>
+      </>
+    )
+  }
+
+  const signedInUser = () => {
+    return (
+      <>
+        <div className="header-right">
+          {auth.username && <p style={{ color: 'white' }}> Hello { auth.username }! </p>}
+        </div>
+
+        <button className="header-button">
+          Account Page
+        </button>
+          
+        <button className="header-button" onClick={() => {handleClick("login")}}>
+          Log Out
+        </button>
+      </>
+    )
   }
 
   return (
@@ -23,13 +59,10 @@ const Header = ({ setModalMode, setDisplayModal }) => {
         </div>
 
         <div className="header-right">
-          <button className="header-button" onClick={() => {handleClick("register")}}>
-            Create a Free Account
-          </button>
-            
-            <button className="header-button" onClick={() => {handleClick("login")}}>
-              Log In
-            </button>
+          {auth.username
+          ? signedInUser() 
+          : signedOutUser()
+          }
         </div>
       </div>
     </header>

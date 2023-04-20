@@ -127,7 +127,7 @@ const Register = ({ setModalMode }) => {
                 
                 <input 
                   className="credential-input"
-                  type="password"
+                  type="text"
                   id="email"
                   ref={userRef} 
                   autoComplete="off"
@@ -153,7 +153,7 @@ const Register = ({ setModalMode }) => {
 
                 <input 
                   className="credential-input"
-                  type="password"
+                  type="text"
                   id="password"
                   onChange={(e) => {setPassword(e.target.value)}}
                   value={password}

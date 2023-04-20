@@ -9,7 +9,7 @@
 
 .app-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 5px 0px;
   width: 970px;
@@ -23,11 +23,11 @@
 }
 
 .header-left {
-  flex: 5;
+  width: fit-content;
 }
 
 .header-right {
-  flex: 3;
+  /* flex: 3; */
   justify-content: flex-end;
 }
 
