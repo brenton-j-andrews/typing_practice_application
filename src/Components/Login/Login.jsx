@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import AuthContext from "../../context/AuthProvider";
+import useAuth from '../../hooks/useAuth';
 
 const LOGIN_URL = "/auth";
 
 const Login = ({ setModalMode }) => {
 
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useAuth();
 
   const [ username, setUserName ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -35,7 +35,6 @@ const Login = ({ setModalMode }) => {
       );
 
       const accessToken = response?.data?.accessToken;
-      console.log("access token from login: ", accessToken);
       setAuth({ username, password, accessToken });
       setUserName("");
       setPassword("");
@@ -111,7 +110,7 @@ const Login = ({ setModalMode }) => {
   const loginFollowUp = () => {
     return (
       <>
-        <h4> Welcome Username! </h4>
+        <h4> Welcome {auth?.username}! </h4>
         <span className='verification-prompt'>  You have successfully logged in! </span>
       </>
     )

@@ -1,12 +1,10 @@
-import { useContext } from "react";
 import axios from "../utilities/axios";
 import useAuth from "./useAuth";
-import AuthContext from "../context/AuthProvider";
 
 
 export const useRefreshJWT = () => {
   
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
   
   const refreshJWT = async () => {
     const response = await axios.get("/auth/refresh", {
@@ -22,7 +20,7 @@ export const useRefreshJWT = () => {
     return response.data.accessToken;
   }
 
-  return { refreshJWT };
+  return refreshJWT;
 };
 
 export default useRefreshJWT;
