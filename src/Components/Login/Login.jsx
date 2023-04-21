@@ -35,7 +35,7 @@ const Login = ({ setModalMode }) => {
       );
 
       const accessToken = response?.data?.accessToken;
-      console.log(accessToken);
+      console.log("access token from login: ", accessToken);
       setAuth({ username, password, accessToken });
       setUserName("");
       setPassword("");

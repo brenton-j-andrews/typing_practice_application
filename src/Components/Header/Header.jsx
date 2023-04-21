@@ -1,5 +1,5 @@
-import React, { useContext} from 'react';
-import AuthContext from '../../context/AuthProvider';
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 import "./header.css";
 
@@ -7,7 +7,7 @@ const logo = require("../../assets/runner.png");
 
 const Header = ({ setModalMode, setDisplayModal }) => {
 
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
 
   const handleClick = (arg) => {
     setModalMode(arg);
@@ -32,14 +32,17 @@ const Header = ({ setModalMode, setDisplayModal }) => {
     return (
       <>
         <div className="header-right">
-          {auth.username && <p style={{ color: 'white' }}> Hello { auth.username }! </p>}
+          {auth?.username && <p style={{ color: 'white' }}> Hello { auth.username }! </p>}
         </div>
 
-        <button className="header-button">
-          Account Page
-        </button>
+        <Link to="/account">
+          <button className="header-button">
+            Account Page
+          </button>
+        </Link>
+
           
-        <button className="header-button" onClick={() => {handleClick("login")}}>
+        <button className="header-button">
           Log Out
         </button>
       </>

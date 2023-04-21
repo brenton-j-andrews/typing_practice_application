@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 import { useTimer, useStopwatch } from 'react-timer-hook';
 
@@ -103,7 +105,9 @@ const StatusBar = ({
         }
 
         <div className="status-bar-right-lower">
-          <button className="status-action-btn return" onClick={() => {navigate("/")}}> Return </button>
+          <Link to="/">
+            <button className="status-action-btn return"> Return Home </button>
+          </Link>
         </div>
       </div>
     </div>

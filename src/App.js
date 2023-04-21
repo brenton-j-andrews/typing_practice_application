@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -7,10 +7,10 @@ import {
 
 import Home from "./Pages/Home/Home";
 import Practice from "./Pages/Practice/Practice";
+import Account from "./Pages/Account/Account";
 import Header from './Components/Header/Header';
 import Modal from "./Components/Modal/Modal";
-
-import AuthContext from "./context/AuthProvider";
+import LoginPersistance from "./Components/LoginPersistance/LoginPersistance";
 
 import './App.css';
 
@@ -22,7 +22,6 @@ function App() {
 
   const [ modalMode, setModalMode ] = useState(null);
   const [ displayModal, setDisplayModal ] = useState(false);
-
 
   // Effect: on change of displayModal, modify modal css to appear.
   useEffect(() => {
@@ -42,13 +41,13 @@ function App() {
   return (
     <div className="app-wrapper">
 
-      <Header 
-        setModalMode={setModalMode}
-        setDisplayModal={setDisplayModal}
-      />
+      <BrowserRouter>
+        <Header 
+          setModalMode={setModalMode}
+          setDisplayModal={setDisplayModal}
+        />
 
-      <div className="page-wrapper">
-        <BrowserRouter>
+        <div className="page-wrapper">
           <Routes>
             <Route 
               exact path="/"
@@ -76,19 +75,32 @@ function App() {
                 />
               }
             />
+
+            {/* <Route element={<LoginPersistance />}>
+              
+            </Route> */}
+
+              <Route 
+                path="/account"
+                element={
+                  <Account />
+                }
+              />
+
           </Routes>
-        </BrowserRouter>
-      </div>
+        </div>
 
-      <div className="modal-wrapper" id="modalWrapper">
 
-          <Modal 
-            modalMode={modalMode}
-            setModalMode={setModalMode}
-            setDisplayModal={setDisplayModal}
-          />
-        
-      </div>
+        <div className="modal-wrapper" id="modalWrapper">
+
+            <Modal 
+              modalMode={modalMode}
+              setModalMode={setModalMode}
+              setDisplayModal={setDisplayModal}
+            />
+          
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
