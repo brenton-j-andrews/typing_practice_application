@@ -5,13 +5,12 @@ import "./header.css";
 
 const logo = require("../../assets/runner.png");
 
-const Header = ({ setModalMode, setDisplayModal }) => {
+const Header = ({ setModalMode }) => {
 
   const { auth } = useAuth();
 
   const handleClick = (arg) => {
     setModalMode(arg);
-    setDisplayModal(true);
   }
 
   const signedOutUser = () => {

@@ -7,7 +7,7 @@ import useAxiosPriavte from "../../hooks/useAxiosPrivate";
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 
-const Account = () => {
+const Account = ({ setModalMode }) => {
 
   const { auth } = useContext(AuthContext);
   const [ loggedIn, setLoggedIn ] = useState(null);
@@ -20,16 +20,15 @@ const Account = () => {
 
     const testCall = async() => {
       try {
-        const response = await axiosPrivate.get("/test", {
+        await axiosPrivate.get("/test", {
           signal: controller.signal
         });
 
-        console.log(response.data);
         isMounted && setLoggedIn(true);
       }
       catch (error) {
+        setModalMode("login");
         setLoggedIn(false);
-        console.log(error);
       }
     }
 

@@ -21,14 +21,14 @@ function App() {
   const [ selectedArrayName, setSelectedArrayName ] = useState();
 
   const [ modalMode, setModalMode ] = useState(null);
-  const [ displayModal, setDisplayModal ] = useState(false);
 
   // Effect: on change of displayModal, modify modal css to appear.
   useEffect(() => {
     const toggleModal = () => {
       let modal = document.getElementById("modalWrapper");
-      if (modal.style.display === "none") {
+      if (modalMode !== null) {
         modal.style.display = "block";
+
       }
       else {
         modal.style.display = "none";
@@ -36,7 +36,7 @@ function App() {
     }
 
     toggleModal();
-  }, [ displayModal ]);
+  }, [ modalMode ]);
 
   return (
     <div className="app-wrapper">
@@ -44,7 +44,6 @@ function App() {
       <BrowserRouter>
         <Header 
           setModalMode={setModalMode}
-          setDisplayModal={setDisplayModal}
         />
 
         <div className="page-wrapper">
@@ -76,16 +75,17 @@ function App() {
               }
             />
 
-            {/* <Route element={<LoginPersistance />}>
-              
-            </Route> */}
-
+            <Route element={<LoginPersistance />}>
               <Route 
                 path="/account"
                 element={
-                  <Account />
+                  <Account 
+                    setModalMode={setModalMode}
+                  />
                 }
               />
+            </Route>
+
 
           </Routes>
         </div>
@@ -96,7 +96,6 @@ function App() {
             <Modal 
               modalMode={modalMode}
               setModalMode={setModalMode}
-              setDisplayModal={setDisplayModal}
             />
           
         </div>

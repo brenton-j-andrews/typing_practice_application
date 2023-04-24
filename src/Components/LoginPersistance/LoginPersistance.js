@@ -4,13 +4,12 @@ import { Outlet } from 'react-router-dom';
 import useRefreshJWT from '../../hooks/useRefreshJWT';
 import useAuth from '../../hooks/useAuth';
 
-import AuthContext from "../../context/AuthProvider";
+
 
 const LoginPersistance = () => {
   const [ isLoading, setIsLoading ] = useState(true);
   const { refreshJWT } = useRefreshJWT();
-  const { auth } = useContext(AuthContext);
-
+  const { auth } = useAuth();
 
   // Effect: if no access token present, get new one from API with refresh token.
   useEffect(() => {
@@ -29,11 +28,11 @@ const LoginPersistance = () => {
     !auth?.accessToken ? verifyRefreshJWT() : setIsLoading(false);
   }, [])
 
-  // For debugging, delete later!
-  useEffect(() => {
-    console.log(`isLoading: ${isLoading}`);
-    console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
-  }, [isLoading])
+  // // For debugging, delete later!
+  // useEffect(() => {
+  //   console.log(`isLoading: ${isLoading}`);
+  //   console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
+  // }, [isLoading])
 
   return (
     <>

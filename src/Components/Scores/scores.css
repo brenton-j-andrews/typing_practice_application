@@ -52,11 +52,6 @@
 }
 
 .scores-table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   margin-top: 10px;
   height: 200px;
   width: 90%;
@@ -64,21 +59,20 @@
   background-color: var(--color-base-light);
 }
 
+tr:nth-child(2n+1) {
+   background-color: var(--color-base-100);
+}
 
-.col-key {
+.scores-table th {
+  height: 40px;
   font-weight: 700;
 }
 
-.score-row {
-  display: flex;
-
-  margin: 5px 0px;
-  width: 90%;
-  padding-bottom: 2px;
-  border-bottom: 2px solid var(--color-base-100);
+.scores-table th, td {
+  text-align: center;
+  border: 3px solid var(--color-base-100);
 }
 
-.score-col {
-  text-align: center;
-  flex: 3;
+.scores-table-empty {
+  background-color: var(--color-base-light);
 }
