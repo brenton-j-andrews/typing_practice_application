@@ -10,7 +10,6 @@ import Practice from "./Pages/Practice/Practice";
 import Account from "./Pages/Account/Account";
 import Header from './Components/Header/Header';
 import Modal from "./Components/Modal/Modal";
-import LoginPersistance from "./Components/LoginPersistance/LoginPersistance";
 
 import './App.css';
 
@@ -75,18 +74,15 @@ function App() {
               }
             />
 
-            <Route element={<LoginPersistance />}>
-              <Route 
-                path="/account"
-                element={
-                  <Account 
-                    setModalMode={setModalMode}
-                  />
-                }
-              />
-            </Route>
 
-
+            <Route 
+              path="/account"
+              element={
+                <Account 
+                  setModalMode={setModalMode}
+                />
+              }
+            />
           </Routes>
         </div>
 

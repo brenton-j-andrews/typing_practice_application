@@ -20,7 +20,14 @@ const Practice = ({
   selectedArrayName 
 }) => {
 
+  const levelNameConstructor = () => {
+    if (typingDifficulty) {
+      return (`${typingDifficulty.toLowerCase()}_${typingDuration}`)
+    } return selectedArrayName.toLowerCase().replace(" ", "_");
+  }
+
   const [ wordArray, setWordArray ] = useState();
+  const [ levelName, setLevelName] = useState(levelNameConstructor());
 
   // Session Stat tracking.
   let sessionStartTime = useRef(null);
@@ -97,6 +104,7 @@ const Practice = ({
     else {
       return (
         <StatsDisplay 
+          levelName={levelName}
           characterCount={characterCount}
           errorCount={errorCount}
           typingDuration={typingDuration}

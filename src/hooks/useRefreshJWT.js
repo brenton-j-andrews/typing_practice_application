@@ -13,7 +13,9 @@ export const useRefreshJWT = () => {
 
     setAuth(prevAuth => {
       console.log(response);
-      return {...prevAuth, accessToken: response.data.accessToken} 
+      return {...prevAuth, 
+        username : response.data.decoded.username,
+        accessToken: response.data.accessToken} 
     })
 
     return response.data.accessToken;

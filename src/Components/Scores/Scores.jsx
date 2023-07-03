@@ -20,20 +20,24 @@ const Scores = ({
   useEffect(() => {
     const fetchScoreData = async() => {
       let response = await axios.get(HIGH_SCORES_URL);
-      console.log(response.data);
       setAllScoreData(response.data);
     }
-
     if (loadingData) fetchScoreData();
   }, [loadingData])
 
   // Effect: on change of level settings, modify selectedLevelData with filtered data.
   useEffect(() => {
-    let levelName = `${typingDifficulty.toLowerCase()}_${typingDuration}`
+    let levelName;
+    if (selectedArrayName) {
+      levelName = `${selectedArrayName.toLowerCase().replace(" ", "_")}`;
+    } else {
+      levelName = `${typingDifficulty.toLowerCase()}_${typingDuration}`;
+    }
+
     const levelScores = allLevelData?.filter(item => item.level === levelName);
     levelScores[0] ? setSelectedLevelData(levelScores[0].highScores) : setSelectedLevelData(null);
     setLoadingData(false)
-  }, [allLevelData, typingDifficulty, typingDuration])
+  }, [allLevelData, typingDifficulty, typingDuration, selectedArrayName])
 
 
   const setTableTitle = () => {

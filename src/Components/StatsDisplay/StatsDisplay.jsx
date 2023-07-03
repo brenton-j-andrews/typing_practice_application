@@ -1,11 +1,13 @@
 import React, { useRef, useState, useContext } from 'react';
 import axios from '../../utilities/axios';
+import { Link } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthProvider';
 
 import "./stats_display.css";
 
 const StatsDisplay = ({ 
+  levelName,
   characterCount, 
   errorCount, 
   typingDuration, 
@@ -35,7 +37,7 @@ const StatsDisplay = ({
     if (auth?.username) {
       try {
         axios.post(`/stats/${auth.username}/addSession`, 
-          JSON.stringify({ words_per_minute, accuracy }),
+          JSON.stringify({levelName, words_per_minute, accuracy }),
           {
             headers : { 'Content-Type' : 'application/json' },
             withCredentials: true
@@ -110,7 +112,10 @@ const StatsDisplay = ({
         }
 
         <div className="stats-lower-btns">
-          <a className="stats-lower-btn" href="/"> Return Home</a>
+          <Link to="/">
+            <button className="stats-lower-btn" href="/"> Return Home</button>
+          </Link>
+          
           <button className="stats-lower-btn"> Try Again </button>
         </div>
       </div>
